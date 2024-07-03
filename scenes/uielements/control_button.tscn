@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/fonts/button_option_font.tres" type="DynamicFont" id=1]
+
+[node name="control_button" type="Control"]
+anchor_right = 0.5
+anchor_bottom = 0.06
+margin_left = 1.0
+margin_right = 1.0
+
+[node name="Button" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+text = "GOOOOOL"
+align = 1
+valign = 1

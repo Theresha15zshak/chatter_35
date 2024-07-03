@@ -1,0 +1,158 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/textures/black1.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/images (1).png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/scripts/control_game_win.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 55
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 38
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 22
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 34
+font_data = ExtResource( 3 )
+
+[node name="control_game_win" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.427451 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Button" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_right = 720.0
+margin_bottom = 465.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.01
+custom_styles/separator = SubResource( 1 )
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_left = 249.0
+margin_top = 469.0
+margin_right = 470.0
+margin_bottom = 545.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 2 )
+text = "Победа!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_left = 293.0
+margin_top = 549.0
+margin_right = 426.0
+margin_bottom = 602.0
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.08
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_right = 76.0
+margin_bottom = 53.0
+size_flags_horizontal = 6
+custom_fonts/font = SubResource( 3 )
+text = "+ 10"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_left = 80.0
+margin_right = 133.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 53, 53 )
+size_flags_horizontal = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+margin_top = 606.0
+margin_right = 720.0
+margin_bottom = 616.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.02
+custom_styles/separator = SubResource( 1 )
+
+[node name="LabelWin" type="Label" parent="VBoxContainer"]
+margin_top = 620.0
+margin_right = 720.0
+margin_bottom = 651.0
+custom_fonts/font = SubResource( 4 )
+text = "После тяжелого боя вам получилось одержать победу"
+align = 1
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+margin_top = 655.0
+margin_right = 720.0
+margin_bottom = 664.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.02
+custom_styles/separator = SubResource( 1 )
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_left = 147.0
+margin_top = 668.0
+margin_right = 572.0
+margin_bottom = 728.0
+rect_min_size = Vector2( 425, 60 )
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 5 )
+text = "Продолжить"
+align = 1
+valign = 1
+
+[node name="HSeparator5" type="HSeparator" parent="VBoxContainer"]
+margin_top = 732.0
+margin_right = 720.0
+margin_bottom = 750.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.04
+custom_styles/separator = SubResource( 1 )
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+margin_left = 200.0
+margin_top = 754.0
+margin_right = 520.0
+margin_bottom = 814.0
+rect_min_size = Vector2( 320, 60 )
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/Button2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 5 )
+text = "В меню"
+align = 1
+valign = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 818.0
+margin_right = 720.0
+margin_bottom = 1280.0
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 1 )
