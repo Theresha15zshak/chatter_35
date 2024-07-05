@@ -1,112 +1,51 @@
 extends Control
 var dialog_json = {
-  "start": {
-	"text": "Вы в древней пещере. Ваша цель - найти золото.",
+	"start": {
+	"text": "Почему ты не на уроке!?",
 	"options": {
-	  "next": {"var": "start1", "chance": 100}
+		"next": {"var":"start1", "chance":100},
 	}
-  },
-  "start1": {
-	"text": "Перед вами три прохода: налево, направо и прямо. Куда пойдете?",
+	},
+	"start1": {
+	"text": "Я тебя уже заждался!!",
 	"options": {
-	  "Налево": {"var": "left", "chance": 100},
-	  "Направо": {"var": "right", "chance": 100},
-	  "Прямо": {"var": "straight", "chance": 100}
+		"(промолчать риск)": {"var":"silent", "chance":38},
+		"Я заболел": {"var":"flew", "chance":100},
+		"Мама сказала ,что сегодня не будет урока": {"var":"no_urok", "chance":100},
 	}
-  },
-  "left": {
-	"text": "Левая дверь ведет в комнату с рычагом. Что сделаете?",
+	},
+	"silent": {
+	"text": "Видимо он не в городе.",
 	"options": {
-	  "Потянуть за рычаг": {"var": "lever", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
+		"(продолжить)": {"var":"end_good", "chance":100},
 	}
-  },
-  "lever": {
-	"text": "Пол проваливается. Оставаться здесь опасно. Идти на звук шагов или ждать?",
+	},
+	"flew": {
+	"text": "Правда? И чем же ты таким заболел?",
 	"options": {
-	  "Идти на звук шагов": {"var": "steps", "chance": 100},
-	  "Ждать": {"var": "end_bad", "chance": 100}
+		"Простудой": {"var":"flew1_1", "chance":100},
+		"Нуу опасным заболеванием гипо, как то там": {"var":"end_bad", "chance":100, "endF":"Учитель вам не поверил и доложил об этом"},
+		"Болит голова, тошнит.": {"var":"flew2_1", "chance":100},
 	}
-  },
-  "steps": {
-	"text": "Вы видите старика, который предлагает помощь. Поверить ему?",
+	},
+	"flew1_1": {
+	"text": "Простудой? Так прийди в маске.",
 	"options": {
-	  "Поверить": {"var": "follow_old_man", "chance": 100},
-	  "Отказаться": {"var": "end_bad", "chance": 100}
+		"Ладно": {"var":"end_bad", "chance":100, "endF":"Учитель заставил вас прийти на урок и оштрафовал"},
 	}
-  },
-  "follow_old_man": {
-	"text": "Старик ведет вас к статуе. Нужно решить головоломку. Попытаться решить?",
+	},
+	"flew2_1": {
+	"text": "Хмм наверное тебе не стоит приходить на урок",
 	"options": {
-	  "Решить головоломку": {"var": "puzzle", "chance": 100},
-	  "Попробовать открыть силой": {"var": "end_bad", "chance": 100}
+		"Хорошо": {"var":"end_good", "chance":100, "end":"Учитель вам поверил. Теперь вам не нужно идти на урок."},
 	}
-  },
-  "puzzle": {
-	"text": "Руны: 'Сила воды превыше огня'. Выберите правильный порядок.",
+	},
+	"no_urok": {
+	"text": "Давай я тогда сейчас напишу твоей маме",
 	"options": {
-	  "Вода-Огонь-Земля-Воздух": {"var": "end_good", "chance": 100},
-	  "Огонь-Вода-Воздух-Земля": {"var": "end_bad", "chance": 100}
+		"Она сейчас на работе и не может ответить": {"var":"end_good", "chance":30, "end":"Учитель вам поверил и не написал маме", "endF":"Учитель вам не поверил и написал маме"},
 	}
-  },
-  "right": {
-	"text": "Перед вами два призрака. 'Что не имеет начала и конца?'",
-	"options": {
-	  "Кольцо": {"var": "ring", "chance": 100},
-	  "Время": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "ring": {
-	"text": "Призраки исчезают, открывая путь к золоту.",
-	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Оставить золото": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "straight": {
-	"text": "Перед вами подземная река с хрупким мостом. Что сделать?",
-	"options": {
-	  "Перейти мост": {"var": "cross_bridge", "chance": 100},
-	  "Искать другой путь": {"var": "find_path", "chance": 100}
-	}
-  },
-  "cross_bridge": {
-	"text": "Вы переходите мост и видите золотую дверь.",
-	"options": {
-	  "Открыть дверь": {"var": "golden_door", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
-	}
-  },
-  "find_path": {
-		"text": "Вы находите лодку и переплываете реку. 'Что принадлежит вам, но другие используют чаще?'",
-	"options": {
-	  "Имя": {"var": "end_good", "chance": 100},
-	  "Тень": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "golden_door": {
-	"text": "Дверь открывается, вы видите сокровища.",
-	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Закрыть дверь": {"var": "start", "chance": 100}
-	}
-  },
-  "n_go": {
-	"text": "Начинается землетрясение. Оставаться здесь опасно. Ваши действия?",
-	"options": {
-	  "Создать гранату": {"var": "end_bad", "chance": 100},
-	  "Бежать": {"var": "n_go2", "chance": 100},
-	  "Ждать помощи": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "n_go2": {
-	"text": "Выход заблокирован кодовой панелью: 'X---'. После X следует Y, после Y — X.",
-	"options": {
-	  "XYXY": {"var": "end_good", "chance": 100},
-	  "XXYX": {"var": "end_bad", "chance": 100},
-	  "XYYX": {"var": "end_bad", "chance": 100}
-	}
-  },
+	},
 }
 
 onready var button1text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button/Button/Label
@@ -125,11 +64,11 @@ var options
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
-var text = preload("res://scenes/uielements/dialog2/controltext.tscn")
+var text = preload("res://scenes/uielements/dialog4/controltext.tscn")
 var text2 = preload("res://scenes/uielements/controltext_rotated.tscn")
 var animation = preload("res://scenes/uielements/animation.tscn")
 
-const next_level = "res://scenes/chats/dialog3.tscn"
+const next_level = "res://scenes/chats/dialog5.tscn"
 
 func _ready():
 	hide_buttons()
@@ -211,7 +150,7 @@ func _on_button_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[0]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level4_completed = true
 		show_dialog(options[options.keys()[0]]["var"]) 
 		
 	else:
@@ -233,7 +172,7 @@ func _on_button_2_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[1]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level4_completed = true
 		show_dialog(options[options.keys()[1]]["var"]) 
 		
 	else:
@@ -255,7 +194,7 @@ func _on_button_3_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[2]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level4_completed = true
 		show_dialog(options[options.keys()[2]]["var"]) 
 		
 	else:
@@ -277,7 +216,7 @@ func _on_button_4_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[3]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level4_completed = true
 		show_dialog(options[options.keys()[3]]["var"]) 
 		
 	else:

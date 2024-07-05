@@ -1,110 +1,92 @@
 extends Control
 var dialog_json = {
   "start": {
-	"text": "Вы в древней пещере. Ваша цель - найти золото.",
+	"text": "Здравствуйте! Я курьер и не могу найти ваш дом.",
 	"options": {
-	  "next": {"var": "start1", "chance": 100}
+	  "Какой курьер?": {"var": "what", "chance": 100},
+	  "Где вы сейчас?": {"var": "where", "chance": 100}
 	}
   },
-  "start1": {
-	"text": "Перед вами три прохода: налево, направо и прямо. Куда пойдете?",
+  "what": {
+	"text": "Вы заказывали доставку еды на сайте.",
 	"options": {
-	  "Налево": {"var": "left", "chance": 100},
-	  "Направо": {"var": "right", "chance": 100},
-	  "Прямо": {"var": "straight", "chance": 100}
+	  "Вспомнил! Где вы сейчас?": {"var": "where", "chance": 100},
+	  "Не помню такого. Возможно, вы ошиблись.": {"var": "end_bad", "chance": 100}
 	}
   },
-  "left": {
-	"text": "Левая дверь ведет в комнату с рычагом. Что сделаете?",
+  "where": {
+	"text": "Я возле метро, здесь все замело снегом.",
 	"options": {
-	  "Потянуть за рычаг": {"var": "lever", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
+	  "Какая станция метро?": {"var": "searching", "chance": 100},
+	  "Попробуйте найти дорогу к 5-му дому через карту. (Риск)": {"var": "risk_path", "chance": 100}
 	}
   },
-  "lever": {
-	"text": "Пол проваливается. Оставаться здесь опасно. Идти на звук шагов или ждать?",
+  "searching": {
+	"text": "Станция метро Новокузнецкая.",
 	"options": {
-	  "Идти на звук шагов": {"var": "steps", "chance": 100},
-	  "Ждать": {"var": "end_bad", "chance": 100}
+	  "Пройдите через местный лес по тропинке, она приведет вас к двору.": {"var": "forest", "chance": 100}
 	}
   },
-  "steps": {
-	"text": "Вы видите старика, который предлагает помощь. Поверить ему?",
+  "forest": {
+	"text": "Я в лесу. Здесь много тропинок. Куда идти дальше?",
 	"options": {
-	  "Поверить": {"var": "follow_old_man", "chance": 100},
-	  "Отказаться": {"var": "end_bad", "chance": 100}
+	  "Идите прямо, пока не увидите старый колодец, затем налево.": {"var": "well", "chance": 100},
+	  "Сверните направо на первую развилке, потом снова направо.": {"var": "wrong_way", "chance": 100}
 	}
   },
-  "follow_old_man": {
-	"text": "Старик ведет вас к статуе. Нужно решить головоломку. Попытаться решить?",
+  "well": {
+	"text": "Я нашел колодец. Что теперь?",
 	"options": {
-	  "Решить головоломку": {"var": "puzzle", "chance": 100},
-	  "Попробовать открыть силой": {"var": "end_bad", "chance": 100}
+	  "От колодца идите налево до конца тропинки.": {"var": "searching2", "chance": 100},
+	  "Пройдите мимо колодца и сверните направо.": {"var": "lost", "chance": 100}
 	}
   },
-  "puzzle": {
-	"text": "Руны: 'Сила воды превыше огня'. Выберите правильный порядок.",
+  "wrong_way": {
+	"text": "Я кажется заблудился. Здесь нет выхода.",
 	"options": {
-	  "Вода-Огонь-Земля-Воздух": {"var": "end_good", "chance": 100},
-	  "Огонь-Вода-Воздух-Земля": {"var": "end_bad", "chance": 100}
+	  "Вернитесь к началу леса и попробуйте снова.": {"var": "forest", "chance": 100},
+	  "Попробуйте найти кого-то для помощи.": {"var": "end_bad", "chance": 100}
 	}
   },
-  "right": {
-	"text": "Перед вами два призрака. 'Что не имеет начала и конца?'",
+  "lost": {
+	"text": "Я снова потерялся. Не вижу никаких ориентиров.",
 	"options": {
-	  "Кольцо": {"var": "ring", "chance": 100},
-	  "Время": {"var": "end_bad", "chance": 100}
+	  "Вернитесь к колодцу и следуйте инструкциям заново.": {"var": "well", "chance": 100},
+	  "Поищите другой путь.": {"var": "end_bad", "chance": 100}
 	}
   },
-  "ring": {
-	"text": "Призраки исчезают, открывая путь к золоту.",
+  "searching2": {
+	"text": "Я вышел из леса и вижу жилой район. Куда дальше?",
 	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Оставить золото": {"var": "end_bad", "chance": 100}
+	  "Идите к большому красному зданию, затем налево.": {"var": "residential", "chance": 100},
+	  "Ищите 5-й подъезд в синем доме.": {"var": "residential2", "chance": 100}
 	}
   },
-  "straight": {
-	"text": "Перед вами подземная река с хрупким мостом. Что сделать?",
+  "residential": {
+	"text": "Я у большого красного здания. Где ваш дом?",
 	"options": {
-	  "Перейти мост": {"var": "cross_bridge", "chance": 100},
-	  "Искать другой путь": {"var": "find_path", "chance": 100}
+	  "Продолжайте идти налево до 5-го подъезда.": {"var": "finded_path", "chance": 100},
+	  "Вы ошиблись. Вернитесь назад.": {"var": "searching2", "chance": 100}
 	}
   },
-  "cross_bridge": {
-	"text": "Вы переходите мост и видите золотую дверь.",
+  "residential2": {
+	"text": "Я у синего дома. Нашел 5-й подъезд.",
 	"options": {
-	  "Открыть дверь": {"var": "golden_door", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
+	  "Отлично, заходите в 5-й подъезд.": {"var": "finded_path", "chance": 100},
+	  "Это не тот дом.": {"var": "searching2", "chance": 100}
 	}
   },
-  "find_path": {
-		"text": "Вы находите лодку и переплываете реку. 'Что принадлежит вам, но другие используют чаще?'",
+  "risk_path": {
+	"text": "Попробую использовать карту, но здесь плохая видимость.",
 	"options": {
-	  "Имя": {"var": "end_good", "chance": 100},
-	  "Тень": {"var": "end_bad", "chance": 100}
+	  "Осторожно следуйте указаниям карты.": {"var": "searching", "chance": 100},
+	  "Вернитесь к метро и попробуйте другой путь.": {"var": "searching", "chance": 100}
 	}
   },
-  "golden_door": {
-	"text": "Дверь открывается, вы видите сокровища.",
+  "finded_path": {
+	"text": "Отлично, я нашел ваш дом. Скоро буду с вашей едой!",
 	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Закрыть дверь": {"var": "start", "chance": 100}
-	}
-  },
-  "n_go": {
-	"text": "Начинается землетрясение. Оставаться здесь опасно. Ваши действия?",
-	"options": {
-	  "Создать гранату": {"var": "end_bad", "chance": 100},
-	  "Бежать": {"var": "n_go2", "chance": 100},
-	  "Ждать помощи": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "n_go2": {
-	"text": "Выход заблокирован кодовой панелью: 'X---'. После X следует Y, после Y — X.",
-	"options": {
-	  "XYXY": {"var": "end_good", "chance": 100},
-	  "XXYX": {"var": "end_bad", "chance": 100},
-	  "XYYX": {"var": "end_bad", "chance": 100}
+	  "Отлично, жду вас!": {"var": "end_good", "chance": 100}
 	}
   },
 }
@@ -125,11 +107,11 @@ var options
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
-var text = preload("res://scenes/uielements/dialog2/controltext.tscn")
+var text = preload("res://scenes/uielements/dialog3/controltext.tscn")
 var text2 = preload("res://scenes/uielements/controltext_rotated.tscn")
 var animation = preload("res://scenes/uielements/animation.tscn")
 
-const next_level = "res://scenes/chats/dialog3.tscn"
+const next_level = "res://scenes/chats/dialog4.tscn"
 
 func _ready():
 	hide_buttons()
@@ -211,7 +193,7 @@ func _on_button_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[0]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level3_completed = true
 		show_dialog(options[options.keys()[0]]["var"]) 
 		
 	else:
@@ -233,7 +215,7 @@ func _on_button_2_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[1]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level3_completed = true
 		show_dialog(options[options.keys()[1]]["var"]) 
 		
 	else:
@@ -255,7 +237,7 @@ func _on_button_3_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[2]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level3_completed = true
 		show_dialog(options[options.keys()[2]]["var"]) 
 		
 	else:
@@ -277,7 +259,7 @@ func _on_button_4_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[3]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level3_completed = true
 		show_dialog(options[options.keys()[3]]["var"]) 
 		
 	else:

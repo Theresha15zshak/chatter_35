@@ -1,4 +1,7 @@
 extends Control
+onready var labelwin = $VBoxContainer/LabelWin
+func _ready():
+	labelwin.text = "{0}".format([get_node("..").get_win_text()])
 
 func _on_button_menu_pressed():
 	get_tree().change_scene_to_file("res://scenes/controlmenu.tscn")

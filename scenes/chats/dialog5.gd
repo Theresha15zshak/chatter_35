@@ -1,112 +1,58 @@
 extends Control
 var dialog_json = {
-  "start": {
-	"text": "Вы в древней пещере. Ваша цель - найти золото.",
+	"start": {
+	"text": "Здравствуйте, откройте!",
 	"options": {
-	  "next": {"var": "start1", "chance": 100}
+	  "next": {"var":"start1", "chance":100},
 	}
-  },
-  "start1": {
-	"text": "Перед вами три прохода: налево, направо и прямо. Куда пойдете?",
+	},
+	"start1": {
+	"text": "Надо поговорить.",
 	"options": {
-	  "Налево": {"var": "left", "chance": 100},
-	  "Направо": {"var": "right", "chance": 100},
-	  "Прямо": {"var": "straight", "chance": 100}
+		"(промолчать)": {"var":"silent", "chance":100},
+		"Вы наверное ошиблись": {"var":"error", "chance":100},
+		"Я не буду открывать": {"var":"nopen", "chance":100},
 	}
-  },
-  "left": {
-	"text": "Левая дверь ведет в комнату с рычагом. Что сделаете?",
+	},
+	"silent": {
+	"text": "Похоже придется выбивать дверь",
 	"options": {
-	  "Потянуть за рычаг": {"var": "lever", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
+	  "(Понадеется что дверь не выбьют)": {"var":"silent2", "chance":20},
+	  "Если выбешь дверь я достану оружие": {"var":"end_good", "chance":60, "end":"Коллектор вам поверил и ушел. Теперь вы можете продолжать спокойно жить", "endF":"Коллектор не поверил вам и выбил дверь."},
 	}
-  },
-  "lever": {
-	"text": "Пол проваливается. Оставаться здесь опасно. Идти на звук шагов или ждать?",
+	},
+	"silent2": {
+	"text": "Надо позвать ребят. Эй открой дверь а то хуже будет.",
 	"options": {
-	  "Идти на звук шагов": {"var": "steps", "chance": 100},
-	  "Ждать": {"var": "end_bad", "chance": 100}
+	  "(Молчать)": {"var":"silent3", "chance":100},
 	}
-  },
-  "steps": {
-	"text": "Вы видите старика, который предлагает помощь. Поверить ему?",
+	},
+	"silent3": {
+	"text": "Похоже здесь никого нет",
 	"options": {
-	  "Поверить": {"var": "follow_old_man", "chance": 100},
-	  "Отказаться": {"var": "end_bad", "chance": 100}
+	  "(Молчать)": {"var":"end_good", "chance":100, "end":"Коллектор ушел. Теперь вы можете продолжать спокойно жить"},
 	}
-  },
-  "follow_old_man": {
-	"text": "Старик ведет вас к статуе. Нужно решить головоломку. Попытаться решить?",
+	},
+	"error": {
+	"text": "Нет все верно, тот адрес",
 	"options": {
-	  "Решить головоломку": {"var": "puzzle", "chance": 100},
-	  "Попробовать открыть силой": {"var": "end_bad", "chance": 100}
+	  "Вам будет хуже если вы узнаете ,что это не тот адрес.": {"var":"end_good", "chance":67, "end":"Коллектор понял, что ошибся адресом и ушел.Теперь вы можете продолжать спокойно жить", "endF":"Коллектор вам не поверил и выбивает дверь"},
 	}
-  },
-  "puzzle": {
-	"text": "Руны: 'Сила воды превыше огня'. Выберите правильный порядок.",
+	},
+	"nopen": {
+	"text": "Открой иначе у тебя будут проблемы!",
 	"options": {
-	  "Вода-Огонь-Земля-Воздух": {"var": "end_good", "chance": 100},
-	  "Огонь-Вода-Воздух-Земля": {"var": "end_bad", "chance": 100}
+	  "Я не буду открывать!": {"var":"nopen2", "chance":67},
 	}
-  },
-  "right": {
-	"text": "Перед вами два призрака. 'Что не имеет начала и конца?'",
+	},
+	"nopen2": {
+	"text": "Открой! Сейчас мои ребят подойдут",
 	"options": {
-	  "Кольцо": {"var": "ring", "chance": 100},
-	  "Время": {"var": "end_bad", "chance": 100}
+	  "Ладно": {"var":"end_bad", "chance":100},
+	  "Я позвоню в полицию!": {"var":"end_good", "chance":100, "end":"Коллектор понял, что ошибся адресом и ушел.Теперь вы можете продолжать спокойно жить"},
+	  "Давай зови их": {"var":"end_bad", "chance":100, "endF":"Коллектор зовет ребят и выбивает дверь"},
 	}
-  },
-  "ring": {
-	"text": "Призраки исчезают, открывая путь к золоту.",
-	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Оставить золото": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "straight": {
-	"text": "Перед вами подземная река с хрупким мостом. Что сделать?",
-	"options": {
-	  "Перейти мост": {"var": "cross_bridge", "chance": 100},
-	  "Искать другой путь": {"var": "find_path", "chance": 100}
-	}
-  },
-  "cross_bridge": {
-	"text": "Вы переходите мост и видите золотую дверь.",
-	"options": {
-	  "Открыть дверь": {"var": "golden_door", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
-	}
-  },
-  "find_path": {
-		"text": "Вы находите лодку и переплываете реку. 'Что принадлежит вам, но другие используют чаще?'",
-	"options": {
-	  "Имя": {"var": "end_good", "chance": 100},
-	  "Тень": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "golden_door": {
-	"text": "Дверь открывается, вы видите сокровища.",
-	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Закрыть дверь": {"var": "start", "chance": 100}
-	}
-  },
-  "n_go": {
-	"text": "Начинается землетрясение. Оставаться здесь опасно. Ваши действия?",
-	"options": {
-	  "Создать гранату": {"var": "end_bad", "chance": 100},
-	  "Бежать": {"var": "n_go2", "chance": 100},
-	  "Ждать помощи": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "n_go2": {
-	"text": "Выход заблокирован кодовой панелью: 'X---'. После X следует Y, после Y — X.",
-	"options": {
-	  "XYXY": {"var": "end_good", "chance": 100},
-	  "XXYX": {"var": "end_bad", "chance": 100},
-	  "XYYX": {"var": "end_bad", "chance": 100}
-	}
-  },
+	},
 }
 
 onready var button1text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button/Button/Label
@@ -119,22 +65,22 @@ onready var button2 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer
 onready var button3 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button/Button
 onready var button4 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button2/Button
 
-var current_dialog_id = "start"
+var start_dialog_id = "start"
 var next_dialog_id
 var options
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
-var text = preload("res://scenes/uielements/dialog2/controltext.tscn")
+var text = preload("res://scenes/uielements/dialog5/controltext.tscn")
 var text2 = preload("res://scenes/uielements/controltext_rotated.tscn")
 var animation = preload("res://scenes/uielements/animation.tscn")
 
-const next_level = "res://scenes/chats/dialog3.tscn"
+const next_level = "res://scenes/chats/dialog6.tscn"
 
 func _ready():
 	hide_buttons()
 	print("GOYDA")
-	show_dialog(current_dialog_id)
+	show_dialog(start_dialog_id)
 	
 
 func _func_game_over_screen():
@@ -147,6 +93,12 @@ func _func_game_win_screen():
 
 func get_next_level():
 	return next_level
+	
+func get_win_text():
+	return next_dialog_id["end"]
+	
+func get_lose_text():
+	return next_dialog_id["endF"]
 	
 func hide_buttons():
 	var buttons = [button1, button2, button3 ,button4]
@@ -211,7 +163,7 @@ func _on_button_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[0]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level5_completed = true
 		show_dialog(options[options.keys()[0]]["var"]) 
 		
 	else:
@@ -233,7 +185,7 @@ func _on_button_2_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[1]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level5_completed = true
 		show_dialog(options[options.keys()[1]]["var"]) 
 		
 	else:
@@ -255,7 +207,7 @@ func _on_button_3_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[2]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level5_completed = true
 		show_dialog(options[options.keys()[2]]["var"]) 
 		
 	else:
@@ -277,7 +229,7 @@ func _on_button_4_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[3]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level5_completed = true
 		show_dialog(options[options.keys()[3]]["var"]) 
 		
 	else:

@@ -1,4 +1,7 @@
 extends Control
+onready var labellose = $VBoxContainer/LabelLose
+func _ready():
+	labellose.text = "{0}".format([get_node("..").get_lose_text()])
 
 
 func _on_button_menu_pressed():

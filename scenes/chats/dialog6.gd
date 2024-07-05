@@ -1,113 +1,64 @@
 extends Control
 var dialog_json = {
   "start": {
-	"text": "Вы в древней пещере. Ваша цель - найти золото.",
+	"text": "Это ограбление! Давай сюда кошелек и телефон! Иначе ножом тебя.",
 	"options": {
-	  "next": {"var": "start1", "chance": 100}
+	  "Вот берите(Отдать кошелек и телефон)": {"var": "give", "chance": 100},
+	  "Попробуй догони меня(Убежать)": {"var": "run", "chance": 100},
+	  "Давай попробуй!(Дать бой)": {"var": "fight", "chance": 100},
+	  "Тебе не стоит меня грабить": {"var": "talk", "chance": 100}
 	}
   },
-  "start1": {
-	"text": "Перед вами три прохода: налево, направо и прямо. Куда пойдете?",
+  "give": {
+	"text": "Вали отсюда теперь",
 	"options": {
-	  "Налево": {"var": "left", "chance": 100},
-	  "Направо": {"var": "right", "chance": 100},
-	  "Прямо": {"var": "straight", "chance": 100}
+	  "Ухожу!": {"var": "end_bad", "chance": 100, "endF":"У вас все украли"}
 	}
   },
-  "left": {
-	"text": "Левая дверь ведет в комнату с рычагом. Что сделаете?",
+  "run": {
+	"text": "Эй , а ну иди сюда!",
 	"options": {
-	  "Потянуть за рычаг": {"var": "lever", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
+	  "Бежать дальше(Риск)": {"var": "end_good", "chance": 50, "end":"У вас получилось убежать", "endF":"Бандит вас догнал"},
+	  "Бандит догоняет вас и угрожает.(Риск)": {"var": "caught", "chance": 100}
 	}
   },
-  "lever": {
-	"text": "Пол проваливается. Оставаться здесь опасно. Идти на звук шагов или ждать?",
+  "caught": {
+	"text": "Попался! Теперь ты у меня запаешь ,жмур. А ну ка давай вещи, а то дам по лицу.",
 	"options": {
-	  "Идти на звук шагов": {"var": "steps", "chance": 100},
-	  "Ждать": {"var": "end_bad", "chance": 100}
+	  "Отдать кошелек и телефон": {"var": "give", "chance": 100},
+	  "(Попытаться выбраться и снова убежать)": {"var": "run_again", "chance": 99}
 	}
   },
-  "steps": {
-	"text": "Вы видите старика, который предлагает помощь. Поверить ему?",
+  "run_again": {
+	"text": "Ну все, доигрался теперь ты труп!",
 	"options": {
-	  "Поверить": {"var": "follow_old_man", "chance": 100},
-	  "Отказаться": {"var": "end_bad", "chance": 100}
+	  "(Попробовать убежать)": {"var": "end_bad", "chance": 25, "end":"У вас получилось убежать", "endF":"Бандит вас догнал"}
 	}
   },
-  "follow_old_man": {
-	"text": "Старик ведет вас к статуе. Нужно решить головоломку. Попытаться решить?",
+  "fight": {
+	"text": "Сейчас ты запоешь у меня!",
 	"options": {
-	  "Решить головоломку": {"var": "puzzle", "chance": 100},
-	  "Попробовать открыть силой": {"var": "end_bad", "chance": 100}
+	  "(Дратся с бандитом риск)": {"var": "end_good", "chance": 25, "end":"У вас получилось победить бандита в бою", "endF":"Бандиту получилось вас победить"},
 	}
   },
-  "puzzle": {
-	"text": "Руны: 'Сила воды превыше огня'. Выберите правильный порядок.",
+  "talk": {
+	"text": "Да? А с чего это?",
 	"options": {
-	  "Вода-Огонь-Земля-Воздух": {"var": "end_good", "chance": 100},
-	  "Огонь-Вода-Воздух-Земля": {"var": "end_bad", "chance": 100}
+	  "Тут везде полиция, я на тебя доложу и тебя сразу же посадят. Если убьеш то сядешь на всю жизнь": {"var": "talk_success", "chance": 30},
+	  "У меня крыша из твоих братков, Юра меня крышует": {"var": "end_good", "chance": 30, "end":"Бандит испугался вашей крыши и теперь вы в безопастности", "endF":"Бандит не поверил вам"},
+	  "У меня крыша их твоих братков, Андрюха меня крышует": {"var": "end_good", "chance": 100, "end":"Бандит испугался вашей крыши и теперь вы в безопастности"}
 	}
   },
-  "right": {
-	"text": "Перед вами два призрака. 'Что не имеет начала и конца?'",
+  "talk_success": {
+	"text": "Наверное ты прав, давай вали отсюда.",
 	"options": {
-	  "Кольцо": {"var": "ring", "chance": 100},
-	  "Время": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "ring": {
-	"text": "Призраки исчезают, открывая путь к золоту.",
-	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Оставить золото": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "straight": {
-	"text": "Перед вами подземная река с хрупким мостом. Что сделать?",
-	"options": {
-	  "Перейти мост": {"var": "cross_bridge", "chance": 100},
-	  "Искать другой путь": {"var": "find_path", "chance": 100}
-	}
-  },
-  "cross_bridge": {
-	"text": "Вы переходите мост и видите золотую дверь.",
-	"options": {
-	  "Открыть дверь": {"var": "golden_door", "chance": 100},
-	  "Вернуться": {"var": "start", "chance": 100}
-	}
-  },
-  "find_path": {
-		"text": "Вы находите лодку и переплываете реку. 'Что принадлежит вам, но другие используют чаще?'",
-	"options": {
-	  "Имя": {"var": "end_good", "chance": 100},
-	  "Тень": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "golden_door": {
-	"text": "Дверь открывается, вы видите сокровища.",
-	"options": {
-	  "Подобрать золото": {"var": "n_go", "chance": 100},
-	  "Закрыть дверь": {"var": "start", "chance": 100}
-	}
-  },
-  "n_go": {
-	"text": "Начинается землетрясение. Оставаться здесь опасно. Ваши действия?",
-	"options": {
-	  "Создать гранату": {"var": "end_bad", "chance": 100},
-	  "Бежать": {"var": "n_go2", "chance": 100},
-	  "Ждать помощи": {"var": "end_bad", "chance": 100}
-	}
-  },
-  "n_go2": {
-	"text": "Выход заблокирован кодовой панелью: 'X---'. После X следует Y, после Y — X.",
-	"options": {
-	  "XYXY": {"var": "end_good", "chance": 100},
-	  "XXYX": {"var": "end_bad", "chance": 100},
-	  "XYYX": {"var": "end_bad", "chance": 100}
+	  "(Убежать)": {"var": "end_good", "chance": 100, "end":"Вы смогли убедить бандита, что ему не стоит вас грабить"}
 	}
   },
 }
+
+
+
 
 onready var button1text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button/Button/Label
 onready var button2text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button2/Button/Label
@@ -119,22 +70,23 @@ onready var button2 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer
 onready var button3 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button/Button
 onready var button4 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button2/Button
 
-var current_dialog_id = "start"
+var start_dialog_id = "start"
 var next_dialog_id
 var options
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
-var text = preload("res://scenes/uielements/dialog2/controltext.tscn")
+var text = preload("res://scenes/uielements/dialog6/controltext.tscn")
 var text2 = preload("res://scenes/uielements/controltext_rotated.tscn")
 var animation = preload("res://scenes/uielements/animation.tscn")
 
-const next_level = "res://scenes/chats/dialog3.tscn"
+
+const next_level = "res://scenes/chats/dialog7.tscn"
 
 func _ready():
 	hide_buttons()
 	print("GOYDA")
-	show_dialog(current_dialog_id)
+	show_dialog(start_dialog_id)
 	
 
 func _func_game_over_screen():
@@ -147,6 +99,12 @@ func _func_game_win_screen():
 
 func get_next_level():
 	return next_level
+
+func get_win_text():
+	return next_dialog_id["end"]
+	
+func get_lose_text():
+	return next_dialog_id["endF"]
 	
 func hide_buttons():
 	var buttons = [button1, button2, button3 ,button4]
@@ -211,7 +169,7 @@ func _on_button_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[0]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level6_completed = true
 		show_dialog(options[options.keys()[0]]["var"]) 
 		
 	else:
@@ -233,7 +191,7 @@ func _on_button_2_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[1]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level6_completed = true
 		show_dialog(options[options.keys()[1]]["var"]) 
 		
 	else:
@@ -255,7 +213,7 @@ func _on_button_3_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[2]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level6_completed = true
 		show_dialog(options[options.keys()[2]]["var"]) 
 		
 	else:
@@ -277,7 +235,7 @@ func _on_button_4_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[3]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level2_completed = true
+			Global.level6_completed = true
 		show_dialog(options[options.keys()[3]]["var"]) 
 		
 	else:
