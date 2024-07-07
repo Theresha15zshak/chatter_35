@@ -1,52 +1,124 @@
 extends Control
 var dialog_json = {
-	"start": {
-	"text": "Почему ты не на уроке!?",
+  "start": {
+	"text": "Вы находитесь у входа на рок-концерт. Что вы хотите сделать в первую очередь?",
 	"options": {
-		"next": {"var":"start1", "chance":100},
+	  "Найти свои места": {"var": "find_seat", "chance": 100},
+	  "Купить мерч и сувениры": {"var": "merch_stand", "chance": 100},
+	  "Пойти к сцене": {"var": "go_to_stage", "chance": 100}
 	}
-	},
-	"start1": {
-	"text": "Я тебя уже заждался!!",
+  },
+  "find_seat": {
+	"text": "Вы нашли свои места и видите друзей. Присоединиться к ним?",
 	"options": {
-		"(промолчать риск)": {"var":"silent", "chance":38, "endF":"Учитель пишет вашей маме"},
-		"Я заболел": {"var":"flew", "chance":100},
-		"Мама сказала ,что сегодня не будет урока": {"var":"no_urok", "chance":100},
+	  "Да, присоединиться к друзьям": {"var": "join_friends", "chance": 100},
+	  "Нет, остаться на своем месте": {"var": "stay_seat", "chance": 100}
 	}
-	},
-	"silent": {
-	"text": "Видимо он не в городе.",
+  },
+  "join_friends": {
+	"text": "Вы присоединились к друзьям. Начать подпевать?",
 	"options": {
-		"(продолжить)": {"var":"end_good", "chance":100},
+	  "Да, подпевать": {"var": "sing_along", "chance": 100},
+	  "Нет, снимать видео": {"var": "record_video", "chance": 100}
 	}
-	},
-	"flew": {
-	"text": "Правда? И чем же ты таким заболел?",
+  },
+  "stay_seat": {
+	"text": "Рядом с вами садится известный музыкант. Поговорить с ним?",
 	"options": {
-		"Простудой": {"var":"flew1_1", "chance":100},
-		"Нуу опасным заболеванием гипо, как то там": {"var":"end_bad", "chance":100, "endF":"Учитель вам не поверил и доложил об этом"},
-		"Болит голова, тошнит.": {"var":"flew2_1", "chance":100},
+	  "Да, поговорить": {"var": "talk_musician", "chance": 100},
+	  "Нет, оставить его в покое": {"var": "leave_musician", "chance": 100}
 	}
-	},
-	"flew1_1": {
-	"text": "Простудой? Так прийди в маске.",
+  },
+  "merch_stand": {
+	"text": "Вы подошли к стенду с мерчем. Что купите?",
 	"options": {
-		"Ладно": {"var":"end_bad", "chance":100, "endF":"Учитель заставил вас прийти на урок и оштрафовал"},
+	  "Купить футболку": {"var": "buy_tshirt", "chance": 100},
+	  "Купить постер": {"var": "buy_poster", "chance": 100},
+	  "Купить альбом": {"var": "buy_album", "chance": 100}
 	}
-	},
-	"flew2_1": {
-	"text": "Хмм наверное тебе не стоит приходить на урок",
+  },
+  "go_to_stage": {
+	"text": "Вы подошли к сцене и видите, как музыканты готовятся. Пойти за кулисы?",
 	"options": {
-		"Хорошо": {"var":"end_good", "chance":100, "end":"Учитель вам поверил. Теперь вам не нужно идти на урок."},
+	  "Да, пойти за кулисы": {"var": "backstage", "chance": 100},
+	  "Нет, остаться у сцены": {"var": "stay_stage", "chance": 100}
 	}
-	},
-	"no_urok": {
-	"text": "Давай я тогда сейчас напишу твоей маме",
+  },
+  "sing_along": {
+	"text": "Вы начинаете подпевать, концерт становится еще лучше. Продолжить наслаждаться концертом?",
 	"options": {
-		"Она сейчас на работе и не может ответить": {"var":"end_good", "chance":30, "end":"Учитель вам поверил и не написал маме", "endF":"Учитель вам не поверил и написал маме"},
+	  "Да, продолжить": {"var": "end_good", "chance": 100, "end":"Вы отлично провели время"}
 	}
-	},
+  },
+  "record_video": {
+	"text": "Вы снимаете видео концерта. Продолжить снимать?",
+	"options": {
+	  "Да, продолжить": {"var": "end_good", "chance": 100, "end":"Вы отлично провели время"}
+	}
+  },
+  "talk_musician": {
+	"text": "Музыкант приглашает вас за кулисы. Пойти?",
+	"options": {
+	  "Да, пойти": {"var": "backstage", "chance": 100},
+	  "Нет, остаться на месте": {"var": "end_good", "chance": 100, "end":"Вы отлично провели время"}
+	}
+  },
+  "leave_musician": {
+	"text": "Вы оставили музыканта в покое и наслаждаетесь концертом. Продолжить?",
+	"options": {
+	  "Да, продолжить": {"var": "end_good", "chance": 100, "end":"Вы отлично провели время"}
+	}
+  },
+  "buy_tshirt": {
+	"text": "Вы купили футболку. Что дальше?",
+	"options": {
+	  "Найти свои места": {"var": "find_seat", "chance": 100},
+	  "Пойти к сцене": {"var": "go_to_stage", "chance": 100}
+	}
+  },
+  "buy_poster": {
+	"text": "Вы купили постер. Что дальше?",
+	"options": {
+	  "Найти свои места": {"var": "find_seat", "chance": 100},
+	  "Пойти к сцене": {"var": "go_to_stage", "chance": 100}
+	}
+  },
+  "buy_album": {
+	"text": "Вы купили альбом. Что дальше?",
+	"options": {
+	  "Найти свои места": {"var": "find_seat", "chance": 100},
+	  "Пойти к сцене": {"var": "go_to_stage", "chance": 100}
+	}
+  },
+  "backstage": {
+	"text": "Вы попали за кулисы. Помогать музыкантам с настройкой инструментов?",
+	"options": {
+	  "Да, помочь": {"var": "help_backstage", "chance": 100},
+	  "Нет, просто понаблюдать": {"var": "observe_backstage", "chance": 100}
+	}
+  },
+  "stay_stage": {
+	"text": "Вы остались у сцены и видите, как музыканты выходят на сцену. Подпевать?",
+	"options": {
+	  "Да, подпевать": {"var": "sing_along", "chance": 100}
+	}
+  },
+  "help_backstage": {
+	"text": "Вы помогли музыкантам и получили возможность пообщаться с ними. Вернуться в зал?",
+	"options": {
+	  "Да, вернуться": {"var": "end_good", "chance": 100, "end":"Вы отлично провели время"}
+	}
+  },
+  "observe_backstage": {
+	"text": "Вы наблюдаете за приготовлениями. Вернуться в зал?",
+	"options": {
+	  "Да, вернуться": {"var": "end_good", "chance": 100, "end":"Вы отлично провели время"}
+	}
+  },
 }
+
+
+
 
 onready var button1text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button/Button/Label
 onready var button2text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button2/Button/Label
@@ -58,22 +130,23 @@ onready var button2 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer
 onready var button3 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button/Button
 onready var button4 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button2/Button
 
-var current_dialog_id = "start"
+var start_dialog_id = "start"
 var next_dialog_id
 var options
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
-var text = preload("res://scenes/uielements/dialog4/controltext.tscn")
+var text = preload("res://scenes/uielements/dialog8/controltext.tscn")
 var text2 = preload("res://scenes/uielements/controltext_rotated.tscn")
 var animation = preload("res://scenes/uielements/animation.tscn")
 
-const next_level = "res://scenes/chats/dialog5.tscn"
+
+const next_level = "res://scenes/controlmenu.tscn"
 
 func _ready():
 	hide_buttons()
 	print("GOYDA")
-	show_dialog(current_dialog_id)
+	show_dialog(start_dialog_id)
 	
 
 func _func_game_over_screen():
@@ -86,6 +159,12 @@ func _func_game_win_screen():
 
 func get_next_level():
 	return next_level
+
+func get_win_text():
+	return next_dialog_id["end"]
+	
+func get_lose_text():
+	return next_dialog_id["endF"]
 	
 func hide_buttons():
 	var buttons = [button1, button2, button3 ,button4]
@@ -150,7 +229,7 @@ func _on_button_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[0]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level4_completed = true
+			Global.level8_completed = true
 		show_dialog(options[options.keys()[0]]["var"]) 
 		
 	else:
@@ -172,7 +251,7 @@ func _on_button_2_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[1]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level4_completed = true
+			Global.level8_completed = true
 		show_dialog(options[options.keys()[1]]["var"]) 
 		
 	else:
@@ -194,7 +273,7 @@ func _on_button_3_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[2]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level4_completed = true
+			Global.level8_completed = true
 		show_dialog(options[options.keys()[2]]["var"]) 
 		
 	else:
@@ -216,7 +295,7 @@ func _on_button_4_pressed():
 			_func_game_over_screen()
 		if options[options.keys()[3]]["var"] == "end_good":
 			_func_game_win_screen()
-			Global.level4_completed = true
+			Global.level8_completed = true
 		show_dialog(options[options.keys()[3]]["var"]) 
 		
 	else:
