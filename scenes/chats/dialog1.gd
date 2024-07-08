@@ -20,13 +20,13 @@ var dialog_json = {
 	  "Рудное золото": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Алмазы": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Незеритовые обломки": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
-	  "Изумрудная руда": {"var":"start_3", "chance":100},
+	  "Изумрудная руда": {"var":"start_3", "chance":100, "endF":"К сожалению вы проиграли"},
 	}
 	},
 	"start_3": {
 	"text": "Какая броня дает больше защиты кольчужная или золотая?",
 	"options": {
-	  "Кольчужная": {"var":"start_4", "chance":100},
+	  "Кольчужная": {"var":"start_4", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Золотая": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	}
 	},
@@ -35,14 +35,14 @@ var dialog_json = {
 	"options": {
 	  "Зомби": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Камень": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
-	  "Чешуйница": {"var":"start_5", "chance":100},
+	  "Чешуйница": {"var":"start_5", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Кошка": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	}
 	},
 	"start_5": {
 	"text": "Какой моб майнкрафта может заражать других мобов",
 	"options": {
-	  "Зомби": {"var":"start_6", "chance":100},
+	  "Зомби": {"var":"start_6", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Дракон": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Крипер": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	}
@@ -50,9 +50,9 @@ var dialog_json = {
 	"start_6": {
 	"text": "Финальный вопрос. По какому блоку можно прыгать?",
 	"options": {
-	  "Слизневый блок": {"var":"end_good", "chance":100, "endF":"Поздравляю!"},
-	  "Медовый блок": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
-	  "Полублок": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
+	  "Слизневый блок": {"var":"end_good", "chance":100, "end":"Поздравляю!"},
+	  "Медовый блок": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли", "end":"Поздравляю!"},
+	  "Полублок": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли", "end":"Поздравляю!"},
 	}
 	},
 }
@@ -95,6 +95,14 @@ func _func_game_win_screen():
 
 func get_next_level():
 	return next_level
+	
+func get_win_text():
+	return next_dialog_id["end"]
+	
+func get_lose_text():
+	print(next_dialog_id,"ENDFFFF")
+	return next_dialog_id["endF"]
+	
 	
 func hide_buttons():
 	var buttons = [button1, button2, button3 ,button4]

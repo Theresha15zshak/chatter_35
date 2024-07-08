@@ -5,7 +5,7 @@ func _ready():
 
 
 func _on_button_menu_pressed():
-	get_tree().change_scene_to_file("res://scenes/menu_screen.tscn")
+	get_tree().change_scene("res://scenes/menu_screen.tscn")
 
 
 func _on_button_pressed():

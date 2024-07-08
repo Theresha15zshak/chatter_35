@@ -5,3 +5,5 @@ var level3_completed = false
 var level4_completed = false
 var level5_completed = false
 var level6_completed = false
+var level7_completed = false
+var level8_completed = false

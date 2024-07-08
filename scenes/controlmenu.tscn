@@ -1,22 +1,262 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/fonts/buttonfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/textures/button_n_.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/button_n_pressed.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/button_menufont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/textures/poloska.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/black1.png" type="Texture" id=5]
+[ext_resource path="res://assets/scripts/controlmenu.gd" type="Script" id=6]
+[ext_resource path="res://assets/textures/2237730.png" type="Texture" id=7]
 
 [node name="controlmenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
 margin_right = 2.0
+script = ExtResource( 6 )
 
-[node name="Button" type="Button" parent="."]
-margin_right = 12.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 280, 100 )
-
-[node name="Label" type="Label" parent="Button"]
+[node name="TextureRect2" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.270588 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 1 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_right = 170.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -694, 369 )
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
 text = "1"
 align = 1
-valign = 1
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.088
+anchor_right = 0.5
+anchor_bottom = 0.088
+margin_left = -85.0
+margin_right = 85.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -1547, -174 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton2"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "2"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton2"]
+self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureButton3" type="TextureButton" parent="."]
+anchor_left = 0.869
+anchor_top = 0.214
+anchor_right = 0.869
+anchor_bottom = 0.217
+margin_left = -85.0
+margin_right = 85.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -1547, -174 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton3"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "3"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton3"]
+self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureButton4" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.322
+anchor_right = 0.5
+anchor_bottom = 0.322
+margin_left = -85.0
+margin_right = 85.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -1547, -174 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton4"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "4"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton4"]
+self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureButton5" type="TextureButton" parent="."]
+anchor_top = 0.404
+anchor_bottom = 0.404
+margin_right = 170.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -694, 369 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton5"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "5"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton5"]
+self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureButton6" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.512
+anchor_right = 0.5
+anchor_bottom = 0.512
+margin_left = -85.0
+margin_right = 85.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -1547, -174 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton6"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "6"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton6"]
+self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureButton7" type="TextureButton" parent="."]
+anchor_left = 0.869
+anchor_top = 0.61
+anchor_right = 0.869
+anchor_bottom = 0.61
+margin_left = -85.0
+margin_right = 85.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -1547, -174 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton7"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "7"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton7"]
+self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="TextureButton8" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.726
+anchor_right = 0.5
+anchor_bottom = 0.726
+margin_left = -85.0
+margin_right = 85.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -1547, -174 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton8"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "8"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton8"]
+self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_button1_pressed"]
+[connection signal="pressed" from="TextureButton2" to="." method="_on_button2_pressed"]
+[connection signal="pressed" from="TextureButton3" to="." method="_on_button3_pressed"]
+[connection signal="pressed" from="TextureButton4" to="." method="_on_button4_pressed"]
+[connection signal="pressed" from="TextureButton5" to="." method="_on_button5_pressed"]
+[connection signal="pressed" from="TextureButton6" to="." method="_on_button6_pressed"]
+[connection signal="pressed" from="TextureButton7" to="." method="_on_button7_pressed"]
+[connection signal="pressed" from="TextureButton8" to="." method="_on_button8_pressed"]

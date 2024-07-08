@@ -127,6 +127,13 @@ func _func_game_win_screen():
 	var game_win_screen_instance = game_win_screen.instance()
 	add_child(game_win_screen_instance)
 
+func get_win_text():
+	return next_dialog_id["end"]
+	
+func get_lose_text():
+	return next_dialog_id["endF"]
+	
+
 func get_next_level():
 	return next_level
 	

@@ -147,7 +147,14 @@ func _func_game_win_screen():
 
 func get_next_level():
 	return next_level
+
+func get_win_text():
+	return next_dialog_id["end"]
 	
+func get_lose_text():
+	return next_dialog_id["endF"]
+	
+
 func hide_buttons():
 	var buttons = [button1, button2, button3 ,button4]
 	for i in range(4):
