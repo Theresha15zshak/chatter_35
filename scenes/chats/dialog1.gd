@@ -43,7 +43,7 @@ var dialog_json = {
 	"text": "Какой моб майнкрафта может заражать других мобов",
 	"options": {
 	  "Зомби": {"var":"start_6", "chance":100, "endF":"К сожалению вы проиграли"},
-	  "Дракон": {"var":"end_bad1", "chance":100, "endF":"К сожалению вы проиграли"},
+	  "Дракон": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	  "Крипер": {"var":"end_bad", "chance":100, "endF":"К сожалению вы проиграли"},
 	}
 	},
@@ -56,7 +56,7 @@ var dialog_json = {
 	}
 	},
 }
-
+# Commit
 onready var button1text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button/Button/Label
 onready var button2text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button2/Button/Label
 onready var button3text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button/Button/Label
