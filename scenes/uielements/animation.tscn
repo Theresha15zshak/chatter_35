@@ -298,12 +298,13 @@ animations = [ {
 [node name="animation" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 0.063
-size_flags_horizontal = 3
-size_flags_vertical = 3
+rect_min_size = Vector2( 720, 80.64 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 70, 40 )
 scale = Vector2( 0.281, 0.248 )
 frames = SubResource( 58 )
-frame = 5
+frame = 11
 playing = true
