@@ -9,28 +9,31 @@ var dialog6 = "res://scenes/chats/dialog6.tscn"
 var dialog7 = "res://scenes/chats/dialog7.tscn"
 var dialog8 = "res://scenes/chats/dialog8.tscn"
 
+func _ready():
+	Global.js_show_rewarded_ad()
+
 func _process(delta: float) -> void:
 	if Global.level1_completed:
 		$TextureButton2/TextureRect.hide()
 		$TextureButton2.disabled = false
 	if Global.level2_completed:
 		$TextureButton3/TextureRect.hide()
-		$TextureButton2.disabled = false
+		$TextureButton3.disabled = false
 	if Global.level3_completed:
 		$TextureButton4/TextureRect.hide()
-		$TextureButton2.disabled = false
+		$TextureButton4.disabled = false
 	if Global.level4_completed:
 		$TextureButton5/TextureRect.hide()
-		$TextureButton2.disabled = false
+		$TextureButton5.disabled = false
 	if Global.level5_completed:
 		$TextureButton6/TextureRect.hide()
-		$TextureButton2.disabled = false
+		$TextureButton6.disabled = false
 	if Global.level6_completed:
 		$TextureButton7/TextureRect.hide()
-		$TextureButton2.disabled = false
+		$TextureButton7.disabled = false
 	if Global.level7_completed:
 		$TextureButton8/TextureRect.hide()
-		$TextureButton2.disabled = false
+		$TextureButton8.disabled = false
 
 func _on_button1_pressed():
 	get_tree().change_scene(dialog1)

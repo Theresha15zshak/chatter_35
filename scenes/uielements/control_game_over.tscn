@@ -47,14 +47,14 @@ size_flags_stretch_ratio = 1.01
 custom_styles/separator = SubResource( 1 )
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_left = 185.0
+margin_left = 202.0
 margin_top = 497.0
-margin_right = 534.0
+margin_right = 518.0
 margin_bottom = 573.0
 size_flags_horizontal = 4
 size_flags_vertical = 5
 custom_fonts/font = SubResource( 2 )
-text = "Проигрышь!"
+text = "Проигрыш!"
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
 margin_top = 577.0

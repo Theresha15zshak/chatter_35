@@ -1,4 +1,6 @@
 extends Control
+signal answers_ended
+signal animation_ended
 var dialog_json = {
   "start": {
 	"text": "Вы находитесь у входа на рок-концерт. Что вы хотите сделать в первую очередь?",
@@ -120,6 +122,7 @@ var dialog_json = {
 
 
 
+
 onready var button1text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button/Button/Label
 onready var button2text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/control_button2/Button/Label
 onready var button3text = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button/Button/Label
@@ -130,16 +133,16 @@ onready var button2 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer
 onready var button3 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button/Button
 onready var button4 = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/control_button2/Button
 
-var start_dialog_id = "start"
-var next_dialog_id
+
+const start_dialog_id = "start"
+var current_dialog_id = "start"
 var options
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
 var text = preload("res://scenes/uielements/dialog8/controltext.tscn")
-var text2 = preload("res://scenes/uielements/controltext_rotated.tscn")
+var text_answer = preload("res://scenes/uielements/controltext_rotated.tscn")
 var animation = preload("res://scenes/uielements/animation.tscn")
-
 
 const next_level = "res://scenes/controlmenu.tscn"
 
@@ -149,154 +152,139 @@ func _ready():
 	show_dialog(start_dialog_id)
 	
 
-func _func_game_over_screen():
-	var game_over_screen_instance = game_over_screen.instance()
-	add_child(game_over_screen_instance)
-	
-func _func_game_win_screen():
-	var game_win_screen_instance = game_win_screen.instance()
-	add_child(game_win_screen_instance)
+
 
 func get_next_level():
 	return next_level
-
+	
 func get_win_text():
-	return next_dialog_id["end"]
+	return dialog_json[current_dialog_id["end"]]
 	
 func get_lose_text():
-	return next_dialog_id["endF"]
+	return dialog_json[current_dialog_id["end"]]
+
+func _func_game_end_screen(result):
+	var game_over_screen_instance = game_over_screen.instance()
+	var game_win_screen_instance = game_win_screen.instance()
+	yield(get_tree().create_timer(0.861), "timeout")
+	if result == "lose":
+		add_child(game_over_screen_instance)
+	elif result == "win":
+		Global.level8_completed = true
+		add_child(game_win_screen_instance)
+	else:
+		push_error("Wrong end type {0}").format([result])
 	
 func hide_buttons():
-	var buttons = [button1, button2, button3 ,button4]
-	for i in range(4):
-		buttons[i].hide()
+	pass 
+	
 
+	for b in [button1, button2, button3 ,button4]:
+		b.hide()
+
+
+
+func play_animation(time_in_seconds):
+	var animation_instance = animation.instance()
+	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(animation_instance)
+	# Timer for animation
+	yield(get_tree().create_timer(time_in_seconds), "timeout")
+	# hiding animation
+	var animka = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/animation
+	animation_instance.queue_free()
+	yield(get_tree().create_timer(0.1), "timeout")
+	emit_signal("animation_ended")
+func draw_comp_answer(t):
+	var comp_dialog_text = text.instance()
+	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(comp_dialog_text)
+	comp_dialog_text.change_text(t)
+
+func draw_answer_options(options):
+	yield(self, "answers_ended")
+	var buttonstext = [button1text, button2text, button3text, button4text]
+	var buttons = [button1, button2, button3 ,button4]
+	for i in range(options.size()):
+		var option_text = options[i]["text"]
+		buttonstext[i].text = "{0}".format([option_text]) 
+		buttons[i].show()
+
+func draw_answers(dialog):
+	for t in dialog["text"]:
+		play_animation(0.5)
+		# Assigning text to text
+		yield(self, "animation_ended")
+		draw_comp_answer(t)
+	emit_signal("answers_ended")
+		
 func show_dialog(dialog_id):
-	if dialog_id in dialog_json:
-		hide_buttons()
-		# Declaring vars for dialog, instance of text and 
-		var dialog = dialog_json[dialog_id]
-		var dialog_text = text.instance()
-		#var nodes = get_node("VBoxContainer/ScrollContainer/VBoxContainer").get_child_count()
-		#Assigning text to button
-		options = dialog["options"]
-		var buttonstext = [button1text, button2text, button3text, button4text]
-		var buttons = [button1, button2, button3 ,button4]
-		print(options.keys()[0],"   ", options[options.keys()[0]],"   ",options[options.keys()[0]]["var"])
-		if options.keys()[0] == "next":
-			get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(dialog_text)
-			dialog_text.change_text(dialog["text"])
-			show_dialog(options[options.keys()[0]]["var"])
-		else:
-			# Animation
-			var animation_instance = animation.instance()
-			get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(animation_instance)
-			# Timer for animation
-			var time_in_seconds = 0.5
-			yield(get_tree().create_timer(time_in_seconds), "timeout")
-			# hiding animation
-			var animka = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/animation
-			animka.queue_free()
-			# Assigning text to text
-			get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(dialog_text)
-			dialog_text.change_text(dialog["text"])
+	if not (dialog_id in dialog_json):
+		push_error("Can't find dialog id")
+	
+	hide_buttons()	
+	current_dialog_id = dialog_id
+	# Declaring vars for dialog, instance of text and 
+	var dialog = dialog_json[dialog_id]
+
+	draw_answers(dialog)
+		
+	if len(dialog["options"]) == 0: 
+		_func_game_end_screen(dialog_json[dialog_id]["end_type"])
+	
+	options = dialog["options"]
+	draw_answer_options(options)
+	
 			
-			for i in range(4):
-				if i < options.size():
-					var option_text = options.keys()[i]
-					next_dialog_id = options[option_text]
-					buttonstext[i].text = "{0}".format([option_text]) 
-					
-					buttons[i].show()
-				else:
-					buttons[i].hide()
+func next_action(chance, get_cahnce, dialog_id_to_show):
+	if chance <= get_cahnce:
+		show_dialog(dialog_id_to_show)
+	else:
+		_func_game_end_screen("lose")
 
 
 func _on_button_pressed():
 	# Declaring chance and adding text
 	var chance = randi() % 100+1
-	var text_button = text2.instance() 
-	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_button)
-	text_button.change_text(options.keys()[0])
-	#var nodes = get_node("Container/CanvasLayer/size/ScrollContainer/VBoxContainer").get_child_count()
-	#text_button.global_position += Vector2(0, (nodes-1)*30)
-	# I
-	# | Not working
+	var index_i = 0
+	var text_answer_player = text_answer.instance() 
+	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_answer_player)
+	text_answer_player.change_text(options[index_i]["text"])
 	
-	#Chance check
-	if chance <= options[options.keys()[0]]["chance"]:
-		if options[options.keys()[0]]["var"] == "end_bad":
-			_func_game_over_screen()
-		if options[options.keys()[0]]["var"] == "end_good":
-			_func_game_win_screen()
-			Global.level8_completed = true
-		show_dialog(options[options.keys()[0]]["var"]) 
-		
-	else:
-		_func_game_over_screen()
-
+	next_action(chance, options[index_i]["params"]["chance"], options[index_i]["params"]["next"])
 
 func _on_button_2_pressed():
-		# Declaring chance and adding text
+	# Declaring chance and adding text
 	var chance = randi() % 100+1
-	var text_button = text2.instance()
-	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_button)
-	text_button.change_text(options.keys()[1])
-	#var nodes = get_node("Container/CanvasLayer/size/ScrollContainer/VBoxContainer").get_child_count()
-	#text_button.global_position += Vector2(0, (nodes-1)*30)
-	print(options[options.keys()[1]],"KEYS")
-	#Chance check
-	if chance <= options[options.keys()[1]]["chance"]:
-		if options[options.keys()[1]]["var"] == "end_bad":
-			_func_game_over_screen()
-		if options[options.keys()[1]]["var"] == "end_good":
-			_func_game_win_screen()
-			Global.level8_completed = true
-		show_dialog(options[options.keys()[1]]["var"]) 
-		
-	else:
-		_func_game_over_screen()
-
-
+	var index_i = 1
+	var text_answer_player = text_answer.instance() 
+	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_answer_player)
+	text_answer_player.change_text(options[index_i]["text"])
+	
+	
+	next_action(chance, options[index_i]["params"]["chance"], options[index_i]["params"]["next"])
 func _on_button_3_pressed():
 	# Declaring chance and adding text
 	var chance = randi() % 100+1
-	var text_button = text2.instance()
-	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_button)
-	text_button.change_text(options.keys()[2])
-	#var nodes = get_node("Container/CanvasLayer/size/ScrollContainer/VBoxContainer").get_child_count()
-	#text_button.global_position += Vector2(0, (nodes-1)*30)
+	var index_i = 2
+	var text_answer_player = text_answer.instance() 
+	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_answer_player)
+	text_answer_player.change_text(options[index_i]["text"])
 	
-	#Chance check
-	if chance <= options[options.keys()[2]]["chance"]:
-		if options[options.keys()[2]]["var"] == "end_bad":
-			_func_game_over_screen()
-		if options[options.keys()[2]]["var"] == "end_good":
-			_func_game_win_screen()
-			Global.level8_completed = true
-		show_dialog(options[options.keys()[2]]["var"]) 
-		
-	else:
-		_func_game_over_screen()
+	
+	next_action(chance, options[index_i]["params"]["chance"], options[index_i]["params"]["next"])
 
 
 func _on_button_4_pressed():
 	# Declaring chance and adding text
 	var chance = randi() % 100+1
-	var text_button = text2.instance()
-	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_button)
-	text_button.change_text(options.keys()[3])
-	#var nodes = get_node("Container/CanvasLayer/size/ScrollContainer/VBoxContainer").get_child_count()
-	#text_button.global_position += Vector2(0, (nodes-1)*30)
+	var index_i = 3
+	var text_answer_player = text_answer.instance() 
+	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_answer_player)
+	text_answer_player.change_text(options[index_i]["text"])
 	
-	#Chance check
-	if chance <= options[options.keys()[3]]["chance"]:
-		if options[options.keys()[3]]["var"] == "end_bad":
-			_func_game_over_screen()
-		if options[options.keys()[3]]["var"] == "end_good":
-			_func_game_win_screen()
-			Global.level8_completed = true
-		show_dialog(options[options.keys()[3]]["var"]) 
-		
-	else:
-		_func_game_over_screen()
+	
+	next_action(chance, options[index_i]["params"]["chance"], options[index_i]["params"]["next"])
+
+
+
+func _on_button_menu_pressed():
+	get_tree().change_scene("res://scenes/controlmenu.tscn")
