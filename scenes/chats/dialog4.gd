@@ -129,7 +129,7 @@ var options
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
-var text = preload("res://scenes/uielements/dialog1/controltext.tscn")
+var text = preload("res://scenes/uielements/dialog4/controltext.tscn")
 var text_answer = preload("res://scenes/uielements/controltext_rotated.tscn")
 var animation = preload("res://scenes/uielements/animation.tscn")
 
@@ -157,7 +157,7 @@ func _func_game_end_screen(result):
 	if result == "lose":
 		add_child(game_over_screen_instance)
 	elif result == "win":
-		Global.level1_completed = true
+		Global.level4_completed = true
 		add_child(game_win_screen_instance)
 	else:
 		push_error("Wrong end type {0}").format([result])

@@ -23,6 +23,8 @@ texture = ExtResource( 5 )
 expand = true
 
 [node name="TextureButton" type="TextureButton" parent="."]
+anchor_top = 0.092
+anchor_bottom = 0.092
 margin_right = 170.0
 margin_bottom = 170.0
 rect_min_size = Vector2( 170, 170 )
@@ -41,9 +43,9 @@ align = 1
 
 [node name="TextureButton2" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.088
+anchor_top = 0.202
 anchor_right = 0.5
-anchor_bottom = 0.088
+anchor_bottom = 0.202
 margin_left = -85.0
 margin_right = 85.0
 margin_bottom = 170.0
@@ -69,13 +71,13 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton3" type="TextureButton" parent="."]
-anchor_left = 0.869
-anchor_top = 0.214
-anchor_right = 0.869
-anchor_bottom = 0.217
-margin_left = -85.0
-margin_right = 85.0
-margin_bottom = 170.0
+anchor_left = 1.0
+anchor_top = 0.384
+anchor_right = 1.0
+anchor_bottom = 0.384
+margin_left = -170.0
+margin_top = -86.92
+margin_bottom = 86.92
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -99,12 +101,13 @@ expand = true
 
 [node name="TextureButton4" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.322
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.322
+anchor_bottom = 0.5
 margin_left = -85.0
+margin_top = -85.0
 margin_right = 85.0
-margin_bottom = 170.0
+margin_bottom = 85.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -127,10 +130,10 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton5" type="TextureButton" parent="."]
-anchor_top = 0.404
-anchor_bottom = 0.404
+anchor_top = 0.72
+anchor_bottom = 0.72
+margin_top = -170.0
 margin_right = 170.0
-margin_bottom = 170.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -694, 369 )
 disabled = true
@@ -154,12 +157,12 @@ expand = true
 
 [node name="TextureButton6" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.512
+anchor_top = 0.865
 anchor_right = 0.5
-anchor_bottom = 0.512
+anchor_bottom = 0.865
 margin_left = -85.0
+margin_top = -170.0
 margin_right = 85.0
-margin_bottom = 170.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -182,13 +185,12 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton7" type="TextureButton" parent="."]
-anchor_left = 0.869
-anchor_top = 0.61
-anchor_right = 0.869
-anchor_bottom = 0.61
-margin_left = -85.0
-margin_right = 85.0
-margin_bottom = 170.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -170.0
+margin_top = -170.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -241,9 +243,9 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
-anchor_left = 0.4
-anchor_right = 0.6
-anchor_bottom = 0.068
+anchor_left = 0.347
+anchor_right = 0.72
+anchor_bottom = 0.146
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 1

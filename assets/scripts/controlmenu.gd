@@ -9,8 +9,6 @@ var dialog6 = "res://scenes/chats/dialog6.tscn"
 var dialog7 = "res://scenes/chats/dialog7.tscn"
 var dialog8 = "res://scenes/chats/dialog8.tscn"
 
-func _ready():
-	Global.js_show_rewarded_ad()
 
 func _process(delta: float) -> void:
 	if Global.level1_completed:
