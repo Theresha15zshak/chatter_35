@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/textures/button_n_.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/button_n_pressed.png" type="Texture" id=2]
@@ -6,7 +6,36 @@
 [ext_resource path="res://assets/textures/890132.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/black1.png" type="Texture" id=5]
 [ext_resource path="res://assets/scripts/controlmenu.gd" type="Script" id=6]
-[ext_resource path="res://assets/textures/logo_bigger.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/logo_croped_3.png" type="Texture" id=7]
+
+[sub_resource type="VisualShader" id=1]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible;
+
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -69.7767, 76.258 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="CameraTexture" id=5]
 
 [node name="controlmenu" type="Control"]
 anchor_right = 1.0
@@ -14,19 +43,24 @@ anchor_bottom = 1.0
 margin_left = 2.0
 margin_right = 2.0
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.270588 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -2.0
 texture = ExtResource( 5 )
 expand = true
 
 [node name="TextureButton" type="TextureButton" parent="."]
-anchor_top = 0.092
-anchor_bottom = 0.092
+anchor_top = 0.305
+anchor_bottom = 0.305
+margin_top = -124.0
 margin_right = 170.0
-margin_bottom = 170.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -694, 369 )
 texture_normal = ExtResource( 1 )
@@ -43,12 +77,13 @@ align = 1
 
 [node name="TextureButton2" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.202
+anchor_top = 0.394
 anchor_right = 0.5
-anchor_bottom = 0.202
+anchor_bottom = 0.394
 margin_left = -85.0
+margin_top = -124.0
 margin_right = 85.0
-margin_bottom = 170.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -72,12 +107,12 @@ expand = true
 
 [node name="TextureButton3" type="TextureButton" parent="."]
 anchor_left = 1.0
-anchor_top = 0.384
+anchor_top = 0.518
 anchor_right = 1.0
-anchor_bottom = 0.384
+anchor_bottom = 0.518
 margin_left = -170.0
-margin_top = -86.92
-margin_bottom = 86.92
+margin_top = -125.92
+margin_bottom = 47.92
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -101,13 +136,13 @@ expand = true
 
 [node name="TextureButton4" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 0.592
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 0.592
 margin_left = -85.0
-margin_top = -85.0
+margin_top = -124.0
 margin_right = 85.0
-margin_bottom = 85.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -132,8 +167,9 @@ expand = true
 [node name="TextureButton5" type="TextureButton" parent="."]
 anchor_top = 0.72
 anchor_bottom = 0.72
-margin_top = -170.0
+margin_top = -209.0
 margin_right = 170.0
+margin_bottom = -39.0001
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -694, 369 )
 disabled = true
@@ -161,8 +197,9 @@ anchor_top = 0.865
 anchor_right = 0.5
 anchor_bottom = 0.865
 margin_left = -85.0
-margin_top = -170.0
+margin_top = -209.0
 margin_right = 85.0
+margin_bottom = -39.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -189,8 +226,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -170.0
-margin_top = -170.0
+margin_left = -177.0
+margin_top = -239.0
+margin_right = -7.0
+margin_bottom = -69.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -243,12 +282,23 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
-anchor_left = 0.347
-anchor_right = 0.72
-anchor_bottom = 0.146
+material = SubResource( 2 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -361.0
+margin_right = 359.0
+margin_bottom = 178.0
 texture = ExtResource( 7 )
 expand = true
-stretch_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 0.368627, 0.505882, 0.117647, 1 )
+margin_right = 315.0
+margin_bottom = 300.0
+texture = SubResource( 5 )
+expand = true
 
 [connection signal="pressed" from="TextureButton" to="." method="_on_button1_pressed"]
 [connection signal="pressed" from="TextureButton2" to="." method="_on_button2_pressed"]

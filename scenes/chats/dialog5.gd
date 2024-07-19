@@ -13,8 +13,8 @@ var dialog_json = {
 	"silent": {
 		"text": ["Похоже придется выбивать дверь"],
 		"options": [
-			{"text": "(Понадеется, что дверь не выбьют)", "params": {"next": "silent2", "chance": 20}},
-			{"text": "Если выбьешь дверь, я достану оружие", "params": {"next": "end_good1", "chance": 60, "end": "Коллектор вам поверил и ушел. Теперь вы можете продолжать спокойно жить", "endF": "Коллектор не поверил вам и выбил дверь."}}
+			{"text": "(Понадеется что дверь не выбьют)", "params": {"next": "silent2", "chance": 20}},
+			{"text": "Если выбьешь дверь, я достану оружие", "params": {"next": "end_good", "chance": 60, "end": "Коллектор вам поверил и ушел. Теперь вы можете продолжать спокойно жить", "endF": "Коллектор не поверил вам и выбил дверь."}}
 		]
 	},
 	"silent2": {
@@ -26,41 +26,41 @@ var dialog_json = {
 	"silent3": {
 		"text": ["Похоже здесь никого нет"],
 		"options": [
-			{"text": "(Молчать)", "params": {"next": "end_good2", "chance": 100, "end": "Коллектор ушел. Теперь вы можете продолжать спокойно жить"}}
+			{"text": "(Молчать)", "params": {"next": "end_good", "chance": 100, "end": "Коллектор ушел. Теперь вы можете продолжать спокойно жить"}}
 		]
 	},
 	"error": {
 		"text": ["Нет, все верно, тот адрес"],
 		"options": [
-			{"text": "Вам будет хуже, если вы узнаете, что это не тот адрес.", "params": {"next": "end_good3", "chance": 67, "end": "Коллектор понял, что ошибся адресом и ушел. Теперь вы можете продолжать спокойно жить", "endF": "Коллектор вам не поверил и выбивает дверь"}}
+			{"text": "Вам будет хуже, если вы узнаете, что это не тот адрес.", "params": {"next": "end_good", "chance": 67, "end": "Коллектор понял, что ошибся адресом и ушел. Теперь вы можете продолжать спокойно жить", "endF": "Коллектор вам не поверил и выбивает дверь"}}
 		]
 	},
 	"nopen": {
 		"text": ["Открой иначе у тебя будут проблемы!"],
 		"options": [
-			{"text": "Я не буду открывать!", "params": {"next": "nopen2", "chance": 67}}
+			{"text": "Я не буду открывать!", "params": {"next": "nopen2", "chance": 100}}
 		]
 	},
 	"nopen2": {
 		"text": ["Открой! Сейчас мои ребята подойдут"],
 		"options": [
-			{"text": "Ладно", "params": {"next": "end_bad1", "chance": 100, "endF": "Коллектор выбивает дверь и возникают проблемы"}},
-			{"text": "Я позвоню в полицию!", "params": {"next": "end_good4", "chance": 100, "end": "Коллектор понял, что ошибся адресом и ушел. Теперь вы можете продолжать спокойно жить"}},
+			{"text": "Ладно, открываю", "params": {"next": "end_bad", "chance": 100, "endF": "Коллектор выбивает дверь и возникают проблемы"}},
+			{"text": "Я позвоню в полицию!", "params": {"next": "end_good", "chance": 100, "end": "Коллектор понял, что ошибся адресом и ушел. Теперь вы можете продолжать спокойно жить"}},
 			{"text": "Давай зови их", "params": {"next": "end_bad2", "chance": 100, "endF": "Коллектор зовет ребят и выбивает дверь"}}
 		]
 	},
-	"end_bad1": {
-		"text": ["Коллектор выбивает дверь и возникают проблемы"],
+	"end_bad": {
+		"text": ["А теперь пора отдавать долги"],
 		"options": [],
 		"end_type": "lose"
 	},
 	"end_bad2": {
-		"text": ["Коллектор зовет ребят и выбивает дверь"],
+		"text": ["Сейчас они придут"],
 		"options": [],
 		"end_type": "lose"
 	},
-	"end_good1": {
-		"text": ["Коллектор вам поверил и ушел. Теперь вы можете продолжать спокойно жить"],
+	"end_good": {
+		"text": ["Ладно, наверное мне стоит уйти"],
 		"options": [],
 		"end_type": "win"
 	},
@@ -80,6 +80,8 @@ var dialog_json = {
 		"end_type": "win"
 	}
 }
+
+
 
 
 
@@ -107,6 +109,7 @@ var animation = preload("res://scenes/uielements/animation.tscn")
 
 const next_level = "res://scenes/chats/dialog6.tscn"
 
+onready var Scroller := $MarginContainer/VBoxContainer/ScrollContainer
 func _ready():
 	hide_buttons()
 	print("GOYDA")
@@ -155,12 +158,15 @@ func play_animation(time_in_seconds):
 	animation_instance.queue_free()
 	yield(get_tree().create_timer(0.1), "timeout")
 	emit_signal("animation_ended")
+
 func draw_comp_answer(t):
 	var comp_dialog_text = text.instance()
 	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(comp_dialog_text)
 	comp_dialog_text.change_text(t)
 
+
 func draw_answer_options(options):
+
 	yield(self, "answers_ended")
 	var buttonstext = [button1text, button2text, button3text, button4text]
 	var buttons = [button1, button2, button3 ,button4]
@@ -168,15 +174,18 @@ func draw_answer_options(options):
 		var option_text = options[i]["text"]
 		buttonstext[i].text = "{0}".format([option_text]) 
 		buttons[i].show()
-
+	yield(get_tree().create_timer(0.001), "timeout")
+	scroll()
 func draw_answers(dialog):
+
 	for t in dialog["text"]:
 		play_animation(0.5)
 		# Assigning text to text
 		yield(self, "animation_ended")
 		draw_comp_answer(t)
 	emit_signal("answers_ended")
-		
+
+	
 func show_dialog(dialog_id):
 	if not (dialog_id in dialog_json):
 		push_error("Can't find dialog id")
@@ -187,23 +196,32 @@ func show_dialog(dialog_id):
 	var dialog = dialog_json[dialog_id]
 
 	draw_answers(dialog)
-		
+	
 	if len(dialog["options"]) == 0: 
 		_func_game_end_screen(dialog_json[dialog_id]["end_type"])
 	
 	options = dialog["options"]
 	draw_answer_options(options)
+
 	
-			
 func next_action(chance, get_cahnce, dialog_id_to_show):
+	yield(get_tree().create_timer(0.001), "timeout")
+	scroll()
 	if chance <= get_cahnce:
 		show_dialog(dialog_id_to_show)
 	else:
 		_func_game_end_screen("lose")
 
+func scroll():
+	var SC = Scroller as ScrollContainer
+	SC.set_v_scroll(SC.get_v_scroll() + 100)
+	print("Scroll_", "   ",SC.get_instance_id())
+
 
 func _on_button_pressed():
 	# Declaring chance and adding text
+	hide_buttons()
+	
 	var chance = randi() % 100+1
 	var index_i = 0
 	var text_answer_player = text_answer.instance() 
@@ -214,34 +232,40 @@ func _on_button_pressed():
 
 func _on_button_2_pressed():
 	# Declaring chance and adding text
+	hide_buttons()
+	
 	var chance = randi() % 100+1
 	var index_i = 1
 	var text_answer_player = text_answer.instance() 
 	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_answer_player)
 	text_answer_player.change_text(options[index_i]["text"])
-	
+
 	
 	next_action(chance, options[index_i]["params"]["chance"], options[index_i]["params"]["next"])
 func _on_button_3_pressed():
 	# Declaring chance and adding text
+	hide_buttons()
+	
+	
 	var chance = randi() % 100+1
 	var index_i = 2
 	var text_answer_player = text_answer.instance() 
 	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_answer_player)
 	text_answer_player.change_text(options[index_i]["text"])
-	
-	
+
 	next_action(chance, options[index_i]["params"]["chance"], options[index_i]["params"]["next"])
 
 
 func _on_button_4_pressed():
 	# Declaring chance and adding text
+	hide_buttons()
+	
 	var chance = randi() % 100+1
 	var index_i = 3
 	var text_answer_player = text_answer.instance() 
 	get_node("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer").add_child(text_answer_player)
 	text_answer_player.change_text(options[index_i]["text"])
-	
+
 	
 	next_action(chance, options[index_i]["params"]["chance"], options[index_i]["params"]["next"])
 
