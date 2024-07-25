@@ -141,7 +141,7 @@ func _func_game_end_screen(result):
 	if result == "lose":
 		add_child(game_over_screen_instance)
 	elif result == "win":
-		Global.levels_unlocked += 1
+		Global.unlock_level(7)
 		add_child(game_win_screen_instance)
 	else:
 		push_error("Wrong end type {0}").format([result])

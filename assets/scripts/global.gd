@@ -1,5 +1,5 @@
 extends Node
-var levels_unlocked = 1
+var unlocked_levels = [1]
 
 var game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
 var game_win_screen = preload("res://scenes/uielements/control_game_win.tscn")
@@ -12,6 +12,11 @@ var coins = 0
 var callback_rewarded_ad = JavaScript.create_callback(self, '_rewarded_ad')
 var callback_ad = JavaScript.create_callback(self, '_ad')
 onready var win = JavaScript.get_interface("window")
+
+func unlock_level(level_index: int):
+	if unlocked_levels.has(level_index):
+		return
+	unlocked_levels.append(level_index)
 
 func js_show_ad():
 	win.ShowAd(callback_ad)

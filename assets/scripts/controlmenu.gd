@@ -1,11 +1,14 @@
 extends Control
 
 func _process(delta: float) -> void:
-	for i in range(2, Global.levels_unlocked + 1):
-		get_node("TextureButton" + str(i) + "/TextureRect").hide()
+	for i in Global.unlocked_levels:
+		var rect_node_path = "TextureButton" + str(i) + "/TextureRect"
+		if !has_node(rect_node_path):
+			continue
+		get_node(rect_node_path).hide()
 		get_node("TextureButton" + str(i)).disabled = false
 
 func on_level_button_pressed(level_id: int):
-	if Global.levels_unlocked < level_id:
+	if !Global.unlocked_levels.has(level_id):
 		return
 	get_tree().change_scene("res://scenes/chats/dialog" + str(level_id) + ".tscn")
