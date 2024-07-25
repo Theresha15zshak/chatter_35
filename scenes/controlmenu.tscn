@@ -300,11 +300,11 @@ margin_bottom = 300.0
 texture = SubResource( 5 )
 expand = true
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_button1_pressed"]
-[connection signal="pressed" from="TextureButton2" to="." method="_on_button2_pressed"]
-[connection signal="pressed" from="TextureButton3" to="." method="_on_button3_pressed"]
-[connection signal="pressed" from="TextureButton4" to="." method="_on_button4_pressed"]
-[connection signal="pressed" from="TextureButton5" to="." method="_on_button5_pressed"]
-[connection signal="pressed" from="TextureButton6" to="." method="_on_button6_pressed"]
-[connection signal="pressed" from="TextureButton7" to="." method="_on_button7_pressed"]
-[connection signal="pressed" from="TextureButton8" to="." method="_on_button8_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="on_level_button_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="TextureButton2" to="." method="on_level_button_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="TextureButton3" to="." method="on_level_button_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="TextureButton4" to="." method="on_level_button_pressed" binds= [ 4 ]]
+[connection signal="pressed" from="TextureButton5" to="." method="on_level_button_pressed" binds= [ 5 ]]
+[connection signal="pressed" from="TextureButton6" to="." method="on_level_button_pressed" binds= [ 6 ]]
+[connection signal="pressed" from="TextureButton7" to="." method="on_level_button_pressed" binds= [ 7 ]]
+[connection signal="pressed" from="TextureButton8" to="." method="on_level_button_pressed" binds= [ 8 ]]
