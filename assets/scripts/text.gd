@@ -1,6 +1,11 @@
+class_name Message
 extends Control
 
-onready var label = $HBoxContainer/MarginContainer/Control/Panel/Label
+onready var label:Label = $HBoxContainer/MarginContainer/Control/Panel/Label
+onready var icon:TextureRect = $HBoxContainer/TextureRect
 
-func change_text(text):
-	label.text = "{0}".format([text]) 
+func set_text(text: String):
+	label.text = text
+
+func set_icon(texture: Texture):
+	icon.texture = texture

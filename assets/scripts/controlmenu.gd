@@ -1,4 +1,5 @@
 extends Control
+var aboba = load("res://assets/textures/profile_mine.png")
 
 func _process(delta: float) -> void:
 	for i in Global.unlocked_levels:
@@ -11,4 +12,5 @@ func _process(delta: float) -> void:
 func on_level_button_pressed(level_id: int):
 	if !Global.unlocked_levels.has(level_id):
 		return
-	get_tree().change_scene("res://scenes/chats/dialog" + str(level_id) + ".tscn")
+	Global.current_level = level_id
+	get_tree().change_scene("res://scenes/chat.tscn")
