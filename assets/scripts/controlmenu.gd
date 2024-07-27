@@ -1,5 +1,4 @@
 extends Control
-var aboba = load("res://assets/textures/profile_mine.png")
 
 func _process(delta: float) -> void:
 	for i in Global.unlocked_levels:
