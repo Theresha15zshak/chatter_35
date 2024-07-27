@@ -8,7 +8,7 @@ const Dialog5 = preload("res://assets/scripts/dialogs/dialog5.gd")
 const Dialog6 = preload("res://assets/scripts/dialogs/dialog6.gd")
 const Dialog7 = preload("res://assets/scripts/dialogs/dialog7.gd")
 
-var unlocked_levels:Array = [1,2,3,4,5,6,7]
+var unlocked_levels:Array = [1]
 var current_level:int = -1
 var levels_data:Array = [
 	Dialog1.new().data, Dialog2.new().data, Dialog3.new().data,
