@@ -6,23 +6,23 @@ var data:DialogData = DialogData.new(
 	"Учитель",
 	"Придумай как прогулять урок"
 ).buildStates().addStartState(
-	["Почему ты не на уроке!?", "Я тебя уже заждался!!"]
+	["Почему ты не на уроке?!", "Я тебя уже заждался!!"]
 ).addOption(
-	"(промолчать риск)", "silent", 0.38
+	"(промолчать, риск)", "silent", 0.38
 ).addOption(
 	"Я заболел", "flew"
 ).addOption(
 	"Мама сказала, что сегодня не будет урока", "no_urok"
 ).addOptionState( # silent
-	"silent", "Видимо он не в городе."
+	"silent", "Видимо, он не в городе."
 ).addOption(
-	"(продолжить)", "end_good"
+	"(продолжить молчать)", "end_good"
 ).addOptionState( # flew
 	"flew", "Правда? И чем же ты таким заболел?"
 ).addOption(
 	"Простудой", "flew1_1"
 ).addOption(
-	"Нуу опасным заболеванием гипо, как то там", "end_bad"
+	"Нуу опасным заболеванием гипо, как-то там", "end_bad"
 ).addOption(
 	"Болит голова, тошнит.", "flew2_1"
 ).addOptionState( # flew1_1
@@ -30,13 +30,13 @@ var data:DialogData = DialogData.new(
 ).addOption(
 	"Ладно", "end_bad"
 ).addOptionState( # flew2_1
-	"flew2_1", "Хмм наверное тебе не стоит приходить на урок"
+	"flew2_1", "Хмм, наверное тебе не стоит приходить на урок"
 ).addOption(
 	"Хорошо", "end_good"
 ).addOptionState( # no_urok
 	"no_urok", "Давай я тогда сейчас напишу твоей маме"
 ).addOption(
-	"Она сейчас на работе и не может ответить", "end_good", 0.3
+	"Она сейчас на работе и не сможет ответить", "end_good", 0.3
 ).addEndState( # end_bad
 	"end_bad", "Приходи на урок", DialogData.EndResult.Lose
 ).addEndState( # end_bad2

@@ -10,21 +10,22 @@ var data:DialogData = DialogData.new(
 	).addOption(
 		"Продолжить", "start1"
 	).addOptionState( # start1
-		"start1", "Перед вами три прохода: комната с рычагом, к призракам и к мосту. Куда пойдете?"
+		"start1", "Перед вами три прохода, один ведёт к комнате с рычагом, " +
+		"второй к призракам и третий к мосту. Куда пойдёте?"
 	).addOption(
-		"комната с рычагом", "left"
+		"В комнату с рычагом", "left"
 	).addOption(
-		"к призракам", "right"
+		"К призракам", "right"
 	).addOption(
-		"к мосту", "straight"
+		"К мосту", "straight"
 	).addOptionState( # left
-		"left", "Левая дверь ведет в комнату с рычагом. Что сделаете?"
+		"left", "Перед вами рычаг. Что сделаете?"
 	).addOption(
 		"Потянуть за рычаг", "lever"
 	).addOption(
 		"Вернуться", "start"
 	).addOptionState( # lever
-		"lever", "Пол проваливается. Оставаться здесь опасно. Идти на звук шагов или ждать?"
+		"lever", "Пол проваливается. Оставаться здесь опасно. Вы слышите звук шагов, идти на них или ждать?"
 	).addOption(
 		"Идти на звук шагов", "steps"
 	).addOption(
@@ -34,21 +35,21 @@ var data:DialogData = DialogData.new(
 	).addOption(
 		"Поверить", "follow_old_man"
 	).addOption(
-		"Отказаться", "end_bad2"
+		"Не поверить и отказаться от помощи", "end_bad2"
 	).addOptionState( # follow_old_man
-		"follow_old_man", "Старик ведет вас к статуе. Нужно решить головоломку. Попытаться решить?"
+		"follow_old_man", "Старик ведёт вас к статуе. Нужно решить головоломку. Попытаться решить?"
 	).addOption(
 		"Решить головоломку", "puzzle"
 	).addOption(
 		"Попробовать открыть силой", "end_bad3"
 	).addOptionState( # puzzle
-		"puzzle", "Руны: 'Сила воды превыше огня'. Выберите правильный порядок."
+		"puzzle", "«Сила воды превыше огня». Выберите правильный порядок."
 	).addOption(
 		"Вода-Огонь-Земля-Воздух", "end_good"
 	).addOption(
 		"Огонь-Вода-Воздух-Земля", "end_bad4"
 	).addOptionState( # right
-		"right", "Перед вами два призрака. 'Что не имеет начала и конца?'"
+		"right", "Перед вами два призрака. Один из них спрашивает: «Что не имеет начала и конца?»"
 	).addOption(
 		"Кольцо", "ring"
 	).addOption(
@@ -72,7 +73,7 @@ var data:DialogData = DialogData.new(
 	).addOption(
 		"Вернуться", "start"
 	).addOptionState( # find_path
-		"find_path", "Вы находите лодку и переплываете реку. 'Что принадлежит вам, но другие используют чаще?'"
+		"find_path", "Вы находите лодку и переплываете реку. «Что принадлежит вам, но другие используют чаще?»"
 	).addOption(
 		"Имя", "end_good"
 	).addOption(
@@ -92,7 +93,7 @@ var data:DialogData = DialogData.new(
 	).addOption(
 		"Ждать помощи", "end_bad9"
 	).addOptionState( # n_go2
-		"n_go2", "Выход заблокирован кодовой панелью: 'X---'. После X следует Y, после Y — X."
+		"n_go2", "Выход заблокирован кодовой панелью: 'X---'. «После X следует Y, после Y — X.»"
 	).addOption(
 		"XYXY", "end_good"
 	).addOption(
@@ -114,7 +115,7 @@ var data:DialogData = DialogData.new(
 	).addEndState( # end_bad7
 		"end_bad7", "Вы проиграли и теперь ваша участь не завидна", DialogData.EndResult.Lose
 	).addEndState( # end_bad8
-		"end_bad8", "Граната подрывает все и убивает вас", DialogData.EndResult.Lose
+		"end_bad8", "Граната подрывает всё и убивает вас", DialogData.EndResult.Lose
 	).addEndState( # end_bad9
 		"end_bad9", "Вы остались ждать помощи, но никто вам не помог и теперь ваша участь не завидна", DialogData.EndResult.Lose
 	).addEndState( # end_bad10
