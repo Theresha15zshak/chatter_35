@@ -35,6 +35,7 @@ onready var icon_node:TextureRect = $MarginContainer/VBoxContainer/HBoxContainer
 onready var title_node:Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label
 onready var description_node:Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label2
 
+
 func _ready():
 	assert(level_id > 0, "Current level id is invalid. It must be over 0")	
 	icon_node.texture = data.icon
@@ -118,7 +119,9 @@ func draw_comp_answer(t):
 	scroll()
 	
 func scroll():
-	scroller.set_v_scroll(scroller.get_v_scroll() + 500)
+	print(scroller.scroll_vertical)
+	scroller.scroll_vertical += 1000
+#	scroller.set_v_scroll(scroller.get_v_scroll() + 500000000)
 	
 func draw_answer_options(options: Array):
 	yield(self, "answers_ended")

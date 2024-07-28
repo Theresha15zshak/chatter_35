@@ -38,7 +38,7 @@ class OptionDialogState:
 	
 	var options:Array
 	
-	func _init(text: Array, _options: Array).(text): 
+	func _init(text: Array, _options: Array).(text):
 		options = _options
 		
 	func get_option(id: int)->AnswerOption:
