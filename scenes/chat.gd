@@ -17,13 +17,17 @@ var current_state_id:String = START_STATE_ID
 var data:DialogData = Global.levels_data[level_id - 1]
 var dialog:Dictionary = data.states
 
-onready var button_texts: Array = [
+onready var button_texts:Array = [
 	get_button_text_node(1), get_button_text_node(2),
 	get_button_text_node(3), get_button_text_node(4)
 ]
 onready var buttons:Array = [
 	get_button_node(1), get_button_node(2),
 	get_button_node(3), get_button_node(4)
+]
+onready var button_debug_texts:Array = [
+	get_button_debug_info_node(1), get_button_debug_info_node(2),
+	get_button_debug_info_node(3), get_button_debug_info_node(4)
 ]
 onready var scroller:ScrollContainer = $MarginContainer/VBoxContainer/ScrollContainer
 onready var scroller_vbox:VBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
@@ -60,10 +64,15 @@ func get_button_node(button_id: int, suffix: String = "")->Node:
 	
 func get_button_text_node(button_id: int)->Node:
 	return get_button_node(button_id, "/Label")
+
+func get_button_debug_info_node(button_id: int)->Node:
+	return get_button_node(button_id, "/DebugInfoLabel")
 	
 func hide_buttons():
 	for button in buttons:
 		button.hide()
+	for debug_text in button_debug_texts:
+		debug_text.hide()
 		
 func get_button(id: int)->Node:
 	return buttons[id - 1]
@@ -113,6 +122,12 @@ func draw_answer_options(options: Array):
 		var option:DialogData.AnswerOption = options[i]
 		button_texts[i].text = option.text
 		buttons[i].show()
+		
+		if Global.is_debug_enabled():
+			var debug_text = button_debug_texts[i]
+			debug_text.show()
+			debug_text.text = "Next: " + option.next_state_id + "|Chance: " + str(option.chance)
+		
 	yield(get_tree().create_timer(0.001), "timeout")
 	scroll()
 	

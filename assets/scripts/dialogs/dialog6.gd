@@ -22,7 +22,7 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # run
 	"run", "Эй, а ну иди сюда!"
 ).addOption(
-	"Бежать дальше (Риск)", "end_good1", 0.01
+	"Бежать дальше (Риск)", "end_good1", 0.5
 ).addOption(
 	"Бандит догоняет вас и угрожает (Риск)", "caught"
 ).addOptionState( # caught
