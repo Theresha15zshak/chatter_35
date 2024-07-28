@@ -29,6 +29,10 @@ var callback_rewarded_ad = JavaScript.create_callback(self, '_rewarded_ad')
 var callback_ad = JavaScript.create_callback(self, '_ad')
 onready var win = JavaScript.get_interface("window")
 
+func _init():
+	YandexSDK.init_game()
+	YandexSDK.init_player()
+
 func unlock_level(level_index: int):
 	if unlocked_levels.has(level_index):
 		return
