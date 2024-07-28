@@ -5,7 +5,7 @@ var data:DialogData = DialogData.new(
 	icon,
 	"Учитель",
 	"Придумай как прогулять урок"
-).buildStates().addStartStateWithMultipleText(
+).buildStates().addStartState(
 	["Почему ты не на уроке!?", "Я тебя уже заждался!!"]
 ).addOption(
 	"(промолчать риск)", "silent", 0.38

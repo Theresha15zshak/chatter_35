@@ -5,7 +5,7 @@ var data = DialogData.new(
 	icon,
 	"Тест по майнкрафту",
 	"Пройди тест по майнкрафту"
-).buildStates().addStartStateWithMultipleText([ # start
+).buildStates().addStartState([ # start
 		"Привет! Пройди тест по майнкрафту", "Какое главное правило майнкрафта?"
 	]).addOption(
 		"Не копать под себя", "start_2"

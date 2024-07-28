@@ -76,39 +76,44 @@ class DialogStatesBuilder:
 			currentStateText, currentOptions
 		)
 		currentOptions = []
-		
-	func addStartStateWithMultipleText(text: Array)->DialogStatesBuilder:
-		currentStateId = "start"
-		currentStateText = text
-		return self
-		
-	func addStartState(text: String)->DialogStatesBuilder:
-		return addStartStateWithMultipleText([text])
 	
-	func addOptionStateWithMultipleText(id: String, text: Array)->DialogStatesBuilder:
-		_endOptionStateBuilding()
-		currentStateId = id
-		currentStateText = text
+	## text should be a String or an Array of Strings
+	func addStartState(text)->DialogStatesBuilder:
+		_setCurrentStateText(text)
+		currentStateId = "start"
 		return self
-		
-	func addOptionState(id: String, text: String)->DialogStatesBuilder:
-		return addOptionStateWithMultipleText(id, [text])
+	
+	## text should be a String or an Array of Strings
+	func addOptionState(id: String, text)->DialogStatesBuilder:
+		_endOptionStateBuilding()
+		_setCurrentStateText(text)
+		currentStateId = id
+		return self
 		
 	func addOption(text: String, next_state_id: String, chance: float = 1.0)->DialogStatesBuilder:
 		currentOptions.append(AnswerOption.new(
 			text, next_state_id, chance
 		))
 		return self
-		
-	func addEndStateWithMultipleText(id: String, text: Array, result: int)->DialogStatesBuilder:
+	
+	## text should be a String or an Array of Strings
+	func addEndState(id: String, text, result: int)->DialogStatesBuilder:
 		_endOptionStateBuilding()
+		_setCurrentStateText(text)
 		data.states[id] = EndDialogState.new(
-			text, result
+			currentStateText, result
 		)
 		return self
 		
-	func addEndState(id: String, text: String, result: int)->DialogStatesBuilder:
-		return addEndStateWithMultipleText(id, [text], result)
+	func _setCurrentStateText(text):
+		if text is Array:
+			currentStateText = text
+		elif text is String:
+			currentStateText = [text]
+		else:
+			push_error("Invalid type of " + text 
+				+ ", it should be Array or String but it is "
+				+ typeof(text))
 		
 	func endStateBuilding()->DialogData:
 		return data

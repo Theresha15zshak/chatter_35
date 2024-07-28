@@ -5,7 +5,7 @@ var data:DialogData = DialogData.new(
 	icon,
 	"Коллектор",
 	"Уклонись от коллектора"
-).buildStates().addStartStateWithMultipleText(
+).buildStates().addStartState(
 	["Здравствуйте, откройте!", "Надо поговорить."]
 ).addOption(
 	"(промолчать)", "silent"
