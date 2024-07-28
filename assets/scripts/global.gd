@@ -32,11 +32,24 @@ onready var win = JavaScript.get_interface("window")
 func _init():
 	YandexSDK.init_game()
 	YandexSDK.init_player()
+	
+func _ready():
+	YandexSDK.connect("data_loaded", self, "_on_data_load")
+	YandexSDK.load_data(["unlocked_levels"])
+	
+func _on_data_load(data: Dictionary):
+	unlocked_levels = data["unlocked_levels"]
+	
+func save_data():
+	YandexSDK.save_data({
+		"unlocked_levels": unlocked_levels
+	})
 
 func unlock_level(level_index: int):
 	if unlocked_levels.has(level_index):
 		return
 	unlocked_levels.append(level_index)
+	save_data()
 	
 func is_on_yandex()->bool:
 	return OS.has_feature("yandex")
