@@ -82,11 +82,13 @@ func add_dialog_state(state_id: String):
 	current_state_id = state_id
 	for message in state.text:
 		draw_comp_message(message)
+		scroll()
 	if state is DialogData.EndDialogState:
 		draw_game_end_screen(state.result)
 		return
 	if state is DialogData.OptionDialogState:
 		draw_answer_options(state.options)
+		scroll()
 	
 func draw_game_end_screen(result: int):
 	yield(get_tree().create_timer(0.861), "timeout")
@@ -101,6 +103,7 @@ func play_animation(time_in_seconds):
 	var animation_instance = animation.instance()
 	scroller_vbox.add_child(animation_instance)
 	# Timer for animation
+	scroll()
 	yield(get_tree().create_timer(time_in_seconds), "timeout")
 	# hiding animation
 	animation_instance.queue_free()
@@ -112,9 +115,10 @@ func draw_comp_answer(t):
 	scroller_vbox.add_child(comp_dialog_text)
 	comp_dialog_text.set_text(t)
 	comp_dialog_text.set_icon(data.icon)
+	scroll()
 	
 func scroll():
-	scroller.set_v_scroll(scroller.get_v_scroll() + 100)
+	scroller.set_v_scroll(scroller.get_v_scroll() + 500)
 	
 func draw_answer_options(options: Array):
 	yield(self, "answers_ended")
@@ -129,13 +133,15 @@ func draw_answer_options(options: Array):
 			debug_text.text = "Next: " + option.next_state_id + "|Chance: " + str(option.chance)
 		
 	yield(get_tree().create_timer(0.001), "timeout")
-	scroll()
+	
 	
 func draw_comp_message(message):
 	play_animation(0.5)
 	yield(self, "animation_ended")
 	draw_comp_answer(message)
+	scroll()
 	emit_signal("answers_ended")
+	scroll()
 	
 	
 func _on_button_menu_pressed():
@@ -148,10 +154,11 @@ func _on_button_answer_pressed(option_id: int):
 	if next_state_id == null:
 		add_child(game_over_screen.instance())
 		return
-		
+	
 	var option = state.get_option(option_id)
 	var text_answer_instance:Message = text_answer.instance()
 	scroller_vbox.add_child(text_answer_instance)
 	text_answer_instance.set_text(option.text)
+	scroll()
 	
 	add_dialog_state(option.next_state_id)

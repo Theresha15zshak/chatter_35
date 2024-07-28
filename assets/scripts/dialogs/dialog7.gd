@@ -10,7 +10,7 @@ var data:DialogData = DialogData.new(
 ).addOption(
 	"Здравствуйте, я хочу повышение.", "start2"
 ).addOptionState( # start2
-	"start2", "Почему вы считаете, что заслуживаете повышения?"
+	"start2", "Почему вы считаете, что заслуживаете повышение?"
 ).addOption(
 	"Я хорошо показал себя в прошлом месяце и долго работаю в компании.", "goodwork"
 ).addOption(
@@ -28,7 +28,7 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # goodwork_team
 	"goodwork_team", "Это не только ваша заслуга. Начальник сыграл большую роль."
 ).addOption(
-	"Разве этого уже не достаточно, чтобы повысить меня?", "end_good2", 0.75
+	"Разве этого уже не достаточно, чтобы повысить меня?", "end_good1", 0.75
 ).addOption(
 	"Без моей помощи, команда не достигла бы таких результатов.", "team_success"
 ).addOptionState( # team_success
@@ -40,19 +40,19 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # training
 	"training", "Это действительно ценно. Обучение новых сотрудников важно для компании."
 ).addOption(
-	"Так почему бы не повысить меня за мои усилия?", "end_good3", 0.85
+	"Так почему бы не повысить меня за мои усилия?", "end_good1", 0.85
 ).addOption(
 	"Я также организовал тренинги, которые улучшили навыки команды.", "trainings"
 ).addOptionState( # trainings
 	"trainings", "Это впечатляет. Но нам нужно больше времени, чтобы оценить результаты."
 ).addOption(
-	"Я готов ждать и продолжать работать на благо компании.", "end_good4", 0.7
+	"Я готов ждать и продолжать работать на благо компании.", "end_good1", 0.7
 ).addOption(
 	"Мои усилия уже принесли видимые результаты.", "visible_results"
 ).addOptionState( # visible_results
 	"visible_results", "Ваша работа действительно заметна. Мы рассмотрим ваше повышение."
 ).addOption(
-	"Спасибо за понимание.", "end_good5"
+	"Спасибо за понимание.", "end_good2"
 ).addOptionState( # goodwork_money
 	"goodwork_money", "Прибыль важна, но не является единственным фактором."
 ).addOption(
@@ -68,13 +68,13 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # time_saving
 	"time_saving", "Экономия времени и ресурсов - это всегда плюс."
 ).addOption(
-	"Так почему бы не повысить меня за мои достижения?", "end_good6", 0.8
+	"Так почему бы не повысить меня за мои достижения?", "end_good2", 0.8
 ).addOption(
 	"Я также готов предложить новые идеи для дальнейшего улучшения.", "new_ideas"
 ).addOptionState( # new_ideas
 	"new_ideas", "Ваш энтузиазм вдохновляет. Мы рассмотрим ваше предложение."
 ).addOption(
-	"Спасибо за возможность!", "end_good7", 0.9
+	"Спасибо за возможность!", "end_good1", 0.9
 ).addOptionState( # team_support
 	"team_support", "Поддержка команды важна, но что еще вы можете предложить?"
 ).addOption(
@@ -90,11 +90,11 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # organized_work
 	"organized_work", "Организация работы - ключ к успеху."
 ).addOption(
-	"Так почему бы не повысить меня за эти усилия?", "end_good8", 0.85
+	"Так почему бы не повысить меня за эти усилия?", "end_good1", 0.85
 ).addOptionState( # team_quality
 	"team_quality", "Улучшение качества работы команды - это весомый аргумент."
 ).addOption(
-	"Спасибо за признание моих усилий!", "end_good9", 0.9
+	"Спасибо за признание моих усилий!", "end_good1", 0.9
 ).addOptionState( # moneyzs
 	"moneyzs", "Прибыль важна, но нужно быть не только прибыльным."
 ).addOption(
@@ -104,13 +104,13 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # teamwork
 	"teamwork", "Хорошие отношения в команде важны."
 ).addOption(
-	"Я помогаю коллегам и способствую развитию компании.", "end_good10", 0.8
+	"Я помогаю коллегам и способствую развитию компании.", "end_good1", 0.8
 ).addOption(
 	"Благодаря моим усилиям, работа команды улучшилась.", "team_improvement"
 ).addOptionState( # team_improvement
 	"team_improvement", "Улучшение работы команды - это значительный вклад."
 ).addOption(
-	"Спасибо за внимание к моим достижениям!", "end_good11", 0.9
+	"Спасибо за внимание к моим достижениям!", "end_good1", 0.9
 ).addOptionState( # money_talks
 	"money_talks", "Деньги решают многое, но не всё."
 ).addOption(
@@ -120,13 +120,13 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # efficiency_methods
 	"efficiency_methods", "Эффективность важна для любой компании."
 ).addOption(
-	"Благодаря моим методам, мы достигли значительных успехов.", "end_good12", 0.85
+	"Благодаря моим методам, мы достигли значительных успехов.", "end_good1", 0.85
 ).addOption(
 	"Я могу продолжать улучшать наши процессы.", "process_improvement"
 ).addOptionState( # company_growth
 	"company_growth", "Рост компании - это всегда хорошо."
 ).addOption(
-	"Так почему бы не повысить меня за мой вклад?", "end_good13", 0.8
+	"Так почему бы не повысить меня за мой вклад?", "end_good1", 0.8
 ).addOption(
 	"Я готов предложить новые идеи для дальнейшего роста.", "new_ideas"
 ).addOptionState( # dedication
@@ -138,7 +138,7 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # new_projects
 	"new_projects", "Новые проекты важны для развития компании."
 ).addOption(
-	"Мои проекты уже показали хорошие результаты.", "end_good14", 0.85
+	"Мои проекты уже показали хорошие результаты.", "end_good1", 0.85
 ).addOption(
 	"Я могу предложить еще больше новых идей.", "new_ideas"
 ).addOptionState( # overtime
@@ -150,33 +150,8 @@ var data:DialogData = DialogData.new(
 ).addEndState( # end_good1
 	"end_good1", "Начальник вам поверил", DialogData.EndResult.Win
 ).addEndState( # end_good2
-	"end_good2", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good3
-	"end_good3", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good4
-	"end_good4", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good5
-	"end_good5", "Начальник вам поверил и рассматривает ваше повышение", DialogData.EndResult.Win
-).addEndState( # end_good6
-	"end_good6", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good7
-	"end_good7", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good8
-	"end_good8", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good9
-	"end_good9", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good10
-	"end_good10", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good11
-	"end_good11", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good12
-	"end_good12", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good13
-	"end_good13", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good14
-	"end_good14", "Начальник вам поверил", DialogData.EndResult.Win
-).addEndState( # end_good15
-	"end_good15", "Начальник вам поверил", DialogData.EndResult.Win
+	"end_good2", "Начальник вам поверил и рассматривает ваше повышение", DialogData.EndResult.Win
 ).addEndState( # end_bad
 	"end_bad", "Начальник вам не поверил", DialogData.EndResult.Lose
 ).endStateBuilding()
+
