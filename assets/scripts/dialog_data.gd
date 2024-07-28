@@ -54,7 +54,7 @@ class OptionDialogState:
 class EndDialogState:
 	extends DialogState
 	
-	var result: int
+	var result:int
 	
 	func _init(text: Array, _result: int).(text):
 		result = _result
