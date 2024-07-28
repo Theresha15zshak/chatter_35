@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "DialogData",
+"language": "GDScript",
+"path": "res://assets/scripts/dialog_data.gd"
+}, {
+"base": "Control",
+"class": "Message",
+"language": "GDScript",
+"path": "res://assets/scripts/text.gd"
+} ]
+_global_script_class_icons={
+"DialogData": "",
+"Message": ""
+}
+
 [application]
 
 config/name="chatter_35"

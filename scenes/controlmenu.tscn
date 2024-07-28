@@ -1,11 +1,41 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/textures/button_n_.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/button_n_pressed.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/button_menufont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/textures/890132.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/black1.png" type="Texture" id=5]
 [ext_resource path="res://assets/scripts/controlmenu.gd" type="Script" id=6]
-[ext_resource path="res://assets/textures/2237730.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/logo_croped_3.png" type="Texture" id=7]
+
+[sub_resource type="VisualShader" id=1]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx, async_visible;
+
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -69.7767, 76.258 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="CameraTexture" id=5]
 
 [node name="controlmenu" type="Control"]
 anchor_right = 1.0
@@ -13,17 +43,24 @@ anchor_bottom = 1.0
 margin_left = 2.0
 margin_right = 2.0
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.270588 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -2.0
 texture = ExtResource( 5 )
 expand = true
 
 [node name="TextureButton" type="TextureButton" parent="."]
+anchor_top = 0.305
+anchor_bottom = 0.305
+margin_top = -124.0
 margin_right = 170.0
-margin_bottom = 170.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -694, 369 )
 texture_normal = ExtResource( 1 )
@@ -40,12 +77,13 @@ align = 1
 
 [node name="TextureButton2" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.088
+anchor_top = 0.394
 anchor_right = 0.5
-anchor_bottom = 0.088
+anchor_bottom = 0.394
 margin_left = -85.0
+margin_top = -124.0
 margin_right = 85.0
-margin_bottom = 170.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -62,20 +100,19 @@ text = "2"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton2"]
-self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton3" type="TextureButton" parent="."]
-anchor_left = 0.869
-anchor_top = 0.214
-anchor_right = 0.869
-anchor_bottom = 0.217
-margin_left = -85.0
-margin_right = 85.0
-margin_bottom = 170.0
+anchor_left = 1.0
+anchor_top = 0.518
+anchor_right = 1.0
+anchor_bottom = 0.518
+margin_left = -170.0
+margin_top = -125.92
+margin_bottom = 47.92
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -92,20 +129,20 @@ text = "3"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton3"]
-self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton4" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.322
+anchor_top = 0.592
 anchor_right = 0.5
-anchor_bottom = 0.322
+anchor_bottom = 0.592
 margin_left = -85.0
+margin_top = -124.0
 margin_right = 85.0
-margin_bottom = 170.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -122,17 +159,17 @@ text = "4"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton4"]
-self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton5" type="TextureButton" parent="."]
-anchor_top = 0.404
-anchor_bottom = 0.404
+anchor_top = 0.72
+anchor_bottom = 0.72
+margin_top = -209.0
 margin_right = 170.0
-margin_bottom = 170.0
+margin_bottom = -39.0001
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -694, 369 )
 disabled = true
@@ -149,20 +186,20 @@ text = "5"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton5"]
-self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton6" type="TextureButton" parent="."]
 anchor_left = 0.5
-anchor_top = 0.512
+anchor_top = 0.865
 anchor_right = 0.5
-anchor_bottom = 0.512
+anchor_bottom = 0.865
 margin_left = -85.0
+margin_top = -209.0
 margin_right = 85.0
-margin_bottom = 170.0
+margin_bottom = -39.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -179,20 +216,20 @@ text = "6"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton6"]
-self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton7" type="TextureButton" parent="."]
-anchor_left = 0.869
-anchor_top = 0.61
-anchor_right = 0.869
-anchor_bottom = 0.61
-margin_left = -85.0
-margin_right = 85.0
-margin_bottom = 170.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -177.0
+margin_top = -239.0
+margin_right = -7.0
+margin_bottom = -69.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -209,13 +246,13 @@ text = "7"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton7"]
-self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton8" type="TextureButton" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.726
 anchor_right = 0.5
@@ -239,17 +276,35 @@ text = "8"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton8"]
-self_modulate = Color( 0.666667, 0.101961, 0.101961, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 7 )
+texture = ExtResource( 4 )
 expand = true
 
-[connection signal="pressed" from="TextureButton" to="." method="_on_button1_pressed"]
-[connection signal="pressed" from="TextureButton2" to="." method="_on_button2_pressed"]
-[connection signal="pressed" from="TextureButton3" to="." method="_on_button3_pressed"]
-[connection signal="pressed" from="TextureButton4" to="." method="_on_button4_pressed"]
-[connection signal="pressed" from="TextureButton5" to="." method="_on_button5_pressed"]
-[connection signal="pressed" from="TextureButton6" to="." method="_on_button6_pressed"]
-[connection signal="pressed" from="TextureButton7" to="." method="_on_button7_pressed"]
-[connection signal="pressed" from="TextureButton8" to="." method="_on_button8_pressed"]
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 2 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -361.0
+margin_right = 359.0
+margin_bottom = 178.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 0.368627, 0.505882, 0.117647, 1 )
+margin_right = 315.0
+margin_bottom = 300.0
+texture = SubResource( 5 )
+expand = true
+
+[connection signal="pressed" from="TextureButton" to="." method="on_level_button_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="TextureButton2" to="." method="on_level_button_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="TextureButton3" to="." method="on_level_button_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="TextureButton4" to="." method="on_level_button_pressed" binds= [ 4 ]]
+[connection signal="pressed" from="TextureButton5" to="." method="on_level_button_pressed" binds= [ 5 ]]
+[connection signal="pressed" from="TextureButton6" to="." method="on_level_button_pressed" binds= [ 6 ]]
+[connection signal="pressed" from="TextureButton7" to="." method="on_level_button_pressed" binds= [ 7 ]]
+[connection signal="pressed" from="TextureButton8" to="." method="on_level_button_pressed" binds= [ 8 ]]
