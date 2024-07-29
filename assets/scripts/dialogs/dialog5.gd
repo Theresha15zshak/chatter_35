@@ -5,7 +5,11 @@ var data:DialogData = DialogData.new(
 	icon,
 	"Коллектор",
 	"Уклонись от коллектора"
-).buildStates().addStartState(
+).buildStates().setDefaultWinScreenText(
+	"Коллектор попал в вашу квартиру"
+).setDefaultLoseScreenText(
+	"Коллектор не попал в вашу квартиру"
+).addStartState(
 	["Здравствуйте, откройте!", "Надо поговорить."]
 ).addOption(
 	"(промолчать)", "silent"
@@ -16,9 +20,9 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # silent
 	"silent", "Похоже придётся выбивать дверь"
 ).addOption(
-	"(Понадеяться, что дверь не выбьют)", "silent2", 0.2
+	"(Понадеяться, что дверь не выбьют)", "silent2", 0.2, "end_bad3"
 ).addOption(
-	"Если выбьешь дверь, я достану оружие (риск)", "end_good", 0.6
+	"Если выбьешь дверь, я достану оружие (риск)", "end_good", 0.6, "end_bad4"
 ).addOptionState( # silent2
 	"silent2", "Надо позвать ребят. Эй, открой дверь, а то хуже будет."
 ).addOption(
@@ -30,7 +34,7 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # error
 	"error", "Нет, всё верно, это тот адрес"
 ).addOption(
-	"Вам будет хуже, если вы узнаете, что это не тот адрес.", "end_good", 0.67
+	"Вам будет хуже, если вы узнаете, что это не тот адрес.", "end_good", 0.67, "end_bad4"
 ).addOptionState( # nopen
 	"nopen", "Открой, иначе у тебя будут проблемы!"
 ).addOption(
@@ -47,10 +51,14 @@ var data:DialogData = DialogData.new(
 	"end_bad", "А теперь пора отдавать долги", DialogData.EndResult.Lose
 ).addEndState( # end_bad2
 	"end_bad2", "Сейчас они придут", DialogData.EndResult.Lose
+).addEndState(
+	"end_bad3", "(Коллектор выбил дверь)", DialogData.EndResult.Lose
+).addEndState(
+	"end_bad4", "(Коллектор не поверил вам и выбил дверь)", DialogData.EndResult.Lose
 ).addEndState( # end_good
 	"end_good", "Ладно, наверное мне стоит уйти", DialogData.EndResult.Win
 ).addEndState( # end_good2
-	"end_good2", "Коллектор ушел. Теперь вы можете продолжать спокойно жить", DialogData.EndResult.Win
+	"end_good2", "(Коллектор ушел. Теперь вы можете продолжать спокойно жить)", DialogData.EndResult.Win
 ).addEndState( # end_good3
-	"end_good3", "Коллектор понял, что ошибся адресом и ушёл. Теперь вы можете продолжать спокойно жить", DialogData.EndResult.Win
+	"end_good3", "(Коллектор понял, что ошибся адресом и ушёл. Теперь вы можете продолжать спокойно жить)", DialogData.EndResult.Win
 ).endStateBuilding()

@@ -5,7 +5,11 @@ var data:DialogData = DialogData.new(
 	icon,
 	"Пещера",
 	"Найди золото пещеры"
-).buildStates().addStartState( # start
+).buildStates().setDefaultWinScreenText(
+	"Вы смогли добыть золото и покинуть пещеру живым"
+).setDefaultLoseScreenText(
+	"Вы не смогли покинуть пещеру живым"
+).addStartState( # start
 		"Вы в древней пещере. Ваша цель - найти золото."
 	).addOption(
 		"Продолжить", "start1"
@@ -111,7 +115,8 @@ var data:DialogData = DialogData.new(
 	).addEndState( # end_bad5
 		"end_bad5", "Вы ошиблись и теперь ваша судьба не завидна", DialogData.EndResult.Lose
 	).addEndState( # end_bad6
-		"end_bad6", "Вы остались без сокровищ и не достигли своей цели", DialogData.EndResult.Lose
+		"end_bad6", "Вы остались без сокровищ и не достигли своей цели", DialogData.EndResult.Lose,
+		"Вы не смогли добыть золото пещеры"
 	).addEndState( # end_bad7
 		"end_bad7", "Вы проиграли и теперь ваша участь не завидна", DialogData.EndResult.Lose
 	).addEndState( # end_bad8

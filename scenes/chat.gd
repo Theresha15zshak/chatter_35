@@ -84,19 +84,22 @@ func add_dialog_state(state_id: String):
 	for message in state.text:
 		draw_comp_message(message)
 	if state is DialogData.EndDialogState:
-		draw_game_end_screen(state.result)
+		draw_game_end_screen(state)
 		return
 	if state is DialogData.OptionDialogState:
 		draw_answer_options(state.options)
 	
-func draw_game_end_screen(result: int):
+func draw_game_end_screen(state: DialogData.EndDialogState):
 	yield(get_tree().create_timer(0.861), "timeout")
-	match result:
+	var screen_instance
+	match state.result:
 		DialogData.EndResult.Win:
 			Global.unlock_level(level_id + 1)
-			add_child(game_win_screen.instance())
+			screen_instance = game_win_screen.instance()
 		DialogData.EndResult.Lose:
-			add_child(game_over_screen.instance())
+			screen_instance = game_over_screen.instance()
+	add_child(screen_instance)
+	screen_instance.set_text(state.end_screen_text)
 	
 func play_animation(time_in_seconds):
 	var animation_instance = animation.instance()
@@ -145,7 +148,10 @@ func _on_button_answer_pressed(option_id: int):
 	var state:DialogData.OptionDialogState = data.states[current_state_id]
 	var next_state_id = state.select_option(option_id)
 	if next_state_id == null:
-		add_child(game_over_screen.instance())
+		var lose_screen = game_over_screen.instance()
+		add_child(lose_screen)
+		if data.default_lose_screen_text != null:
+			lose_screen.set_text(data.default_lose_screen_text)
 		return
 	
 	var option = state.get_option(option_id)
@@ -153,4 +159,4 @@ func _on_button_answer_pressed(option_id: int):
 	scroller_vbox.add_child(text_answer_instance)
 	text_answer_instance.set_text(option.text)
 	
-	add_dialog_state(option.next_state_id)
+	add_dialog_state(next_state_id)

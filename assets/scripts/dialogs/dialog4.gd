@@ -5,10 +5,14 @@ var data:DialogData = DialogData.new(
 	icon,
 	"Учитель",
 	"Придумай как прогулять урок"
-).buildStates().addStartState(
+).buildStates().setDefaultWinScreenText(
+	"У вас получилось прогулять урок"
+).setDefaultLoseScreenText(
+	"Вам пришлось прийти на урок"
+).addStartState(
 	["Почему ты не на уроке?!", "Я тебя уже заждался!!"]
 ).addOption(
-	"(промолчать, риск)", "silent", 0.38
+	"(промолчать, риск)", "silent", 0.38, "end_bad4"
 ).addOption(
 	"Я заболел", "flew"
 ).addOption(
@@ -22,7 +26,7 @@ var data:DialogData = DialogData.new(
 ).addOption(
 	"Простудой", "flew1_1"
 ).addOption(
-	"Нуу опасным заболеванием гипо, как-то там", "end_bad"
+	"Нуу опасным заболеванием гипо, как-то там", "end_bad3"
 ).addOption(
 	"Болит голова, тошнит.", "flew2_1"
 ).addOptionState( # flew1_1
@@ -36,13 +40,15 @@ var data:DialogData = DialogData.new(
 ).addOptionState( # no_urok
 	"no_urok", "Давай я тогда сейчас напишу твоей маме"
 ).addOption(
-	"Она сейчас на работе и не сможет ответить", "end_good", 0.3
+	"Она сейчас на работе и не сможет ответить", "end_good2", 0.3, "end_bad3"
 ).addEndState( # end_bad
 	"end_bad", "Приходи на урок", DialogData.EndResult.Lose
 ).addEndState( # end_bad2
-	"end_bad2", "Учитель заставил вас прийти на урок и оштрафовал", DialogData.EndResult.Lose
+	"end_bad2", "(Учитель заставил вас прийти на урок и оштрафовал)", DialogData.EndResult.Lose
 ).addEndState( # end_bad3
-	"end_bad3", "Учитель вам не поверил и написал маме", DialogData.EndResult.Lose
+	"end_bad3", "(Учитель вам не поверил и написал маме)", DialogData.EndResult.Lose
+).addEndState( # end_bad3
+	"end_bad4", "(Учитель решил написать вашей маме)", DialogData.EndResult.Lose
 ).addEndState( # end_good
 	"end_good", "Можешь не приходить на занятие", DialogData.EndResult.Win
 ).addEndState( # end_good2

@@ -5,7 +5,11 @@ var data:DialogData = DialogData.new(
 	icon,
 	"Курьер",
 	"Получите доставку еды"
-).buildStates().addStartState(
+).buildStates().setDefaultWinScreenText(
+	"Курьер нашёл ваш дом и доставил еду"
+).setDefaultLoseScreenText(
+	"Курьер не нашёл ваш дом и вы остались без еды"
+).addStartState(
 	"Здравствуйте! Я курьер и не могу найти ваш дом."
 ).addOption(
 	"Какой курьер?", "what"

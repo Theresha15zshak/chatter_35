@@ -99,7 +99,7 @@ margin_top = 620.0
 margin_right = 720.0
 margin_bottom = 651.0
 custom_fonts/font = SubResource( 4 )
-text = "Поздравляю!"
+text = "Поздравляем!"
 align = 1
 autowrap = true
 
