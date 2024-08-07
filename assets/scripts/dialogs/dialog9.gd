@@ -5,7 +5,11 @@ var data:DialogData = DialogData.new(
 	icon,
 	"Служба спасения",
 	"Наводнение"
-).buildStates().addStartState(
+).buildStates().setDefaultWinScreenText(
+	"Вам удалось выжить"
+).setDefaultLoseScreenText(
+	"Вам не удалось выжить"
+).addStartState(
 	"Здравствуйте, это служба спасения. Какова ваша ситуация и где вы находитесь?"
 ).addOption(
 	"Я в доме, уровень воды быстро поднимается. Мы на втором этаже, адрес: улица Лесная, 5.", "report_location"
