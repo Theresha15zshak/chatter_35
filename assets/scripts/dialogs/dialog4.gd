@@ -12,45 +12,90 @@ var data:DialogData = DialogData.new(
 ).addStartState(
 	["Почему ты не на уроке?!", "Я тебя уже заждался!!"]
 ).addOption(
-	"(промолчать, риск)", "silent", 0.38, "end_bad4"
+	"(промолчать, риск)", "silent", 0.5, "end_bad4"
 ).addOption(
-	"Я заболел", "flew"
+	"Я заболел", "sick"
 ).addOption(
 	"Мама сказала, что сегодня не будет урока", "no_urok"
-).addOptionState( # silent
+).addOption(
+	"Общественный транспорт задержался", "public_transport_delay"
+).addOptionState(
 	"silent", "Видимо, он не в городе."
 ).addOption(
-	"(продолжить молчать)", "end_good"
-).addOptionState( # flew
-	"flew", "Правда? И чем же ты таким заболел?"
+	"(продолжить молчать)", "end_good", 0.7, "end_bad"
 ).addOption(
-	"Простудой", "flew1_1"
+	"(начать придумывать оправдание)", "begin_excuse"
 ).addOption(
-	"Нуу опасным заболеванием гипо, как-то там", "end_bad3"
+	"(извиниться и попытаться уйти)", "apologize_leave", 0.3, "end_bad2"
+).addOptionState(
+	"begin_excuse", "Учитель ждет объяснений."
 ).addOption(
-	"Болит голова, тошнит.", "flew2_1"
-).addOptionState( # flew1_1
-	"flew1_1", "Простудой? Так прийди в маске."
+	"Извините, я забыл, что сегодня урок", "forget_class"
+).addOption(
+	"Мне стало плохо по пути сюда", "sick", 0.4, "end_bad2"
+).addOption(
+	"У меня срочные дела дома", "urgent_home"
+).addOptionState(
+	"forget_class", "Как можно было забыть о таком важном уроке?!"
+).addOption(
+	"Это больше не повторится", "end_bad3"
+).addOption(
+	"Постараюсь компенсировать пропущенное", "compensate"
+).addOptionState(
+	"compensate", "Как именно ты планируешь компенсировать пропущенное?"
+).addOption(
+	"Могу сделать дополнительное задание", "end_good2"
+).addOption(
+	"Запишусь на дополнительные занятия", "end_good"
+).addOptionState(
+	"sick", "Правда? И чем же ты таким заболел?"
+).addOption(
+	"Простудой", "sick1"
+).addOption(
+	"Болит голова тошнит", "sick2"
+).addOptionState(
+	"sick1", "Простудой? Так прийди в маске."
 ).addOption(
 	"Ладно", "end_bad"
-).addOptionState( # flew2_1
-	"flew2_1", "Хмм, наверное тебе не стоит приходить на урок"
 ).addOption(
-	"Хорошо", "end_good"
-).addOptionState( # no_urok
+	"У меня нет маски", "end_good"
+).addOptionState(
+	"sick2", "Хмм, наверное тебе не стоит приходить на урок"
+).addOption(
+	"Хорошо, спасибо за понимание", "end_good"
+).addOptionState(
 	"no_urok", "Давай я тогда сейчас напишу твоей маме"
 ).addOption(
 	"Она сейчас на работе и не сможет ответить", "end_good2", 0.3, "end_bad3"
-).addEndState( # end_bad
+).addOption(
+	"Подождите, я сам позвоню", "call_mom"
+).addOptionState(
+	"call_mom", "Звони."
+).addOption(
+	"Мама сказала, что ошиблась", "end_bad"
+).addOption(
+	"Мама сказала, что нужно остаться дома", "end_good2"
+).addOptionState(
+	"public_transport_delay", "Долго ждал автобуса или поезда?"
+).addOption(
+	"Да, это заняло больше времени, чем ожидалось", "end_good"
+).addOption(
+	"Да, были задержки на линии", "end_good2"
+).addEndState(
 	"end_bad", "Приходи на урок", DialogData.EndResult.Lose
-).addEndState( # end_bad2
+).addEndState(
 	"end_bad2", "(Учитель заставил вас прийти на урок и оштрафовал)", DialogData.EndResult.Lose
-).addEndState( # end_bad3
+).addEndState(
 	"end_bad3", "(Учитель вам не поверил и написал маме)", DialogData.EndResult.Lose
-).addEndState( # end_bad3
+).addEndState(
 	"end_bad4", "(Учитель решил написать вашей маме)", DialogData.EndResult.Lose
-).addEndState( # end_good
+).addEndState(
 	"end_good", "Можешь не приходить на занятие", DialogData.EndResult.Win
-).addEndState( # end_good2
+).addEndState(
 	"end_good2", "Учитель вам поверил и не написал маме", DialogData.EndResult.Win
 ).endStateBuilding()
+
+
+
+
+

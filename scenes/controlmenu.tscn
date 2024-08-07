@@ -196,10 +196,10 @@ anchor_left = 0.5
 anchor_top = 0.865
 anchor_right = 0.5
 anchor_bottom = 0.865
-margin_left = -85.0
-margin_top = -209.0
-margin_right = 85.0
-margin_bottom = -39.0
+margin_left = -126.0
+margin_top = -232.2
+margin_right = 44.0
+margin_bottom = -62.2
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -226,10 +226,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -177.0
-margin_top = -239.0
-margin_right = -7.0
-margin_bottom = -69.0
+margin_left = -228.0
+margin_top = -317.0
+margin_right = -58.0
+margin_bottom = -147.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -252,14 +252,13 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="TextureButton8" type="TextureButton" parent="."]
-visible = false
 anchor_left = 0.5
-anchor_top = 0.726
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.726
+anchor_bottom = 1.0
 margin_left = -85.0
+margin_top = -170.0
 margin_right = 85.0
-margin_bottom = 170.0
 rect_min_size = Vector2( 170, 170 )
 rect_pivot_offset = Vector2( -1547, -174 )
 disabled = true
@@ -276,6 +275,32 @@ text = "8"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="TextureButton8"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="TextureButton9" type="TextureButton" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -170.0
+margin_right = 170.0
+rect_min_size = Vector2( 170, 170 )
+rect_pivot_offset = Vector2( -1547, -174 )
+disabled = true
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TextureButton9"]
+anchor_right = 1.0
+anchor_bottom = 0.464
+custom_fonts/font = ExtResource( 3 )
+text = "9"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton9"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
@@ -308,3 +333,4 @@ expand = true
 [connection signal="pressed" from="TextureButton6" to="." method="on_level_button_pressed" binds= [ 6 ]]
 [connection signal="pressed" from="TextureButton7" to="." method="on_level_button_pressed" binds= [ 7 ]]
 [connection signal="pressed" from="TextureButton8" to="." method="on_level_button_pressed" binds= [ 8 ]]
+[connection signal="pressed" from="TextureButton9" to="." method="on_level_button_pressed" binds= [ 9 ]]

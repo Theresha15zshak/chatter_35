@@ -7,15 +7,16 @@ const Dialog4 = preload("res://assets/scripts/dialogs/dialog4.gd")
 const Dialog5 = preload("res://assets/scripts/dialogs/dialog5.gd")
 const Dialog6 = preload("res://assets/scripts/dialogs/dialog6.gd")
 const Dialog7 = preload("res://assets/scripts/dialogs/dialog7.gd")
-
-const _DEBUG_MODE:bool = true
+const Dialog8 = preload("res://assets/scripts/dialogs/dialog8.gd")
+const Dialog9 = preload("res://assets/scripts/dialogs/dialog9.gd")
+const _DEBUG_MODE:bool = false
 
 var unlocked_levels:Array = [1]
 var current_level:int = -1
 var levels_data:Array = [
 	Dialog1.new().data, Dialog2.new().data, Dialog3.new().data,
 	Dialog4.new().data, Dialog5.new().data, Dialog6.new().data,
-	Dialog7.new().data
+	Dialog7.new().data,Dialog8.new().data,Dialog9.new().data
 ]
 
 const game_over_screen = preload("res://scenes/uielements/control_game_over.tscn")
@@ -54,4 +55,6 @@ func is_on_yandex()->bool:
 
 func is_debug_enabled()->bool:
 	return _DEBUG_MODE && !is_on_yandex()	
+
+
 	
