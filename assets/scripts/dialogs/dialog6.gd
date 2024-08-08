@@ -151,6 +151,8 @@ var data:DialogData = DialogData.new(
 ).addEndState(
 	"end_good1", "Э, ты куда убежал?", DialogData.EndResult.Win
 ).addEndState(
+	"end_good", "Ок", DialogData.EndResult.Win
+).addEndState(
 	"end_good2", "Ай, сдаюсь-сдаюсь", DialogData.EndResult.Win
 ).addEndState(
 	"end_good3", "Хм, ну ты прав, иди отсюда ", DialogData.EndResult.Win

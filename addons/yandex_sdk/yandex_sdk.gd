@@ -60,15 +60,17 @@ func init_leaderboard():
 
 
 func init_game():
-	if not game_initialized:
-		var options = JavaScript.create_object("Object")
-		window.InitGame(options, callback_game_initialized)
+	if OS.has_feature("yandex"):
+		if not game_initialized:
+			var options = JavaScript.create_object("Object")
+			window.InitGame(options, callback_game_initialized)
 
 
 func show_ad():
-	if not game_initialized :
-		yield(self, "game_initialized")
-	window.ShowAd(callback_ad)
+	if OS.has_feature("yandex"):
+		if not game_initialized :
+			yield(self, "game_initialized")
+		window.ShowAd(callback_ad)
 
 
 func show_rewarded_ad():

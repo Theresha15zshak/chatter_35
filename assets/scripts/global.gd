@@ -29,12 +29,25 @@ var callback_rewarded_ad = JavaScript.create_callback(self, '_rewarded_ad')
 var callback_ad = JavaScript.create_callback(self, '_ad')
 onready var win = JavaScript.get_interface("window")
 
+func _ready():
+	YandexSDK.connect("data_loaded", self, "_on_data_load")
+#	YandexSDK.load_data(["unlocked_levels"])
+	YandexSDK.init_game()
+	YandexSDK.init_player()
+	
+	print("COMPLETED")
+
+
 func js_show_ad():
 	win.ShowAd(callback_ad)
 	# Здесь можно приостановить музыку / звуки
 func js_show_rewarded_ad():
 	win.ShowAdRewardedVideo(callback_rewarded_ad)
 	# Здесь можно приостановить музыку / звуки
+func save_data():
+	YandexSDK.save_data({
+		"unlocked_levels": unlocked_levels
+	})
 
 
 
@@ -47,9 +60,13 @@ func unlock_level(level_index: int):
 	if unlocked_levels.has(level_index):
 		return
 	unlocked_levels.append(level_index)
+	save_data()
+	
+func is_on_yandex()->bool:
+	return OS.has_feature("yandex")
+	
 	
 func is_debug_enabled()->bool:
-	return _DEBUG_MODE
-
+	return _DEBUG_MODE && !is_on_yandex()
 
 	

@@ -1,6 +1,9 @@
 extends Control
 
 func _ready():
+	if Global.is_on_yandex():
+		$TextureRect.hide()
+	
 	var unlocked_levels:Array = Global.unlocked_levels
 	if Global.is_debug_enabled():
 		unlocked_levels = []

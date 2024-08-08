@@ -48,9 +48,9 @@ var data = DialogData.new(
 	).addOption(
 		"Крипер", "end_bad"
 	).addOptionState( # start_6
-		"start_6", "Какой предмет необходим для портала в Эндер?"
+		"start_6", "Какой предмет необходим для портала в Энд?"
 	).addOption(
-		"Око эндера", "start_7"
+		"Эндер жемчуг", "start_7"
 	).addOption(
 		"Алмаз", "end_bad"
 	).addOption(
