@@ -9,9 +9,9 @@ const Dialog6 = preload("res://assets/scripts/dialogs/dialog6.gd")
 const Dialog7 = preload("res://assets/scripts/dialogs/dialog7.gd")
 const Dialog8 = preload("res://assets/scripts/dialogs/dialog8.gd")
 const Dialog9 = preload("res://assets/scripts/dialogs/dialog9.gd")
-const _DEBUG_MODE:bool = false
+const _DEBUG_MODE:bool = true
 
-var unlocked_levels = "[1]"
+var unlocked_levels = [1]
 var current_level:int = -1
 var levels_data:Array = [
 	Dialog1.new().data, Dialog2.new().data, Dialog3.new().data,
@@ -35,7 +35,7 @@ func _ready():
 func save_data():
 	print("WILL BE SAVED  ",unlocked_levels,"   ",typeof(unlocked_levels))
 	YandexSDK.save_data({
-		"unlocked_levels": unlocked_levels
+		"unlocked_levels": str(unlocked_levels)
 	})
 		
 func _on_data_loaded(data: Dictionary):
@@ -47,9 +47,7 @@ func _on_unlocked_levels_loaded(data: Dictionary):
 		unlocked_levels = data.unlocked_levels	
 
 func unlock_level(level_index: int):
-	unlocked_levels = str_to_list(unlocked_levels)
-	if unlocked_levels.has(level_index):
-		return
+	unlocked_levels = unlocked_levels
 	unlocked_levels.append(level_index)
 	unlocked_levels = str(unlocked_levels)
 	print(unlocked_levels)
@@ -59,11 +57,5 @@ func unlock_level(level_index: int):
 func is_debug_enabled()->bool:
 	return _DEBUG_MODE
 
-func str_to_list(str_l) -> Array:
-	var list_ = []
-	for i in str_l:
-		if i in "1234567890":
-			list_.append(i)
-	return list_
 
 	
