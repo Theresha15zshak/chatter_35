@@ -95,6 +95,7 @@ func draw_game_end_screen(state: DialogData.EndDialogState):
 	match state.result:
 		DialogData.EndResult.Win:
 			Global.unlock_level(level_id + 1)
+			Global.save_data()
 			screen_instance = game_win_screen.instance()
 		DialogData.EndResult.Lose:
 			screen_instance = game_over_screen.instance()

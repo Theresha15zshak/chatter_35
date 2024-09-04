@@ -1,0 +1,123 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 358.0
+margin_bottom = 1280.0
+size_flags_horizontal = 3
+
+[node name="AdButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_right = 358.0
+margin_bottom = 638.0
+size_flags_vertical = 3
+text = "Ad"
+
+[node name="RewardAdButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+margin_top = 642.0
+margin_right = 358.0
+margin_bottom = 1280.0
+size_flags_vertical = 3
+text = "Reward Ad"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 362.0
+margin_right = 720.0
+margin_bottom = 1280.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+margin_right = 358.0
+margin_bottom = 424.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 177.0
+margin_bottom = 424.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SaveDataButton" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_right = 177.0
+margin_bottom = 210.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SaveData"
+
+[node name="LoadDataButton" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 214.0
+margin_right = 177.0
+margin_bottom = 424.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "LoadData"
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 181.0
+margin_right = 358.0
+margin_bottom = 424.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Some data"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+margin_top = 428.0
+margin_right = 358.0
+margin_bottom = 852.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer3"]
+margin_right = 177.0
+margin_bottom = 424.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SaveStatButton" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer3/VBoxContainer"]
+margin_right = 177.0
+margin_bottom = 210.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SaveStat"
+
+[node name="LoadStatButton" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer3/VBoxContainer"]
+margin_top = 214.0
+margin_right = 177.0
+margin_bottom = 424.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "LoadStat"
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer/VBoxContainer2/HBoxContainer3"]
+margin_left = 181.0
+margin_right = 358.0
+margin_bottom = 424.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 1e+07
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+margin_top = 856.0
+margin_right = 358.0
+margin_bottom = 1280.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/HBoxContainer2"]
+margin_top = 188.0
+margin_right = 358.0
+margin_bottom = 236.0
+size_flags_horizontal = 3
+text = "jgvhgvjggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+autowrap = true
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/AdButton" to="." method="_on_AdButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/RewardAdButton" to="." method="_on_RewardAdButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/SaveDataButton" to="." method="_on_SaveDataButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer/LoadDataButton" to="." method="_on_LoadDataButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer3/VBoxContainer/SaveStatButton" to="." method="_on_SaveStatButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer3/VBoxContainer/LoadStatButton" to="." method="_on_LoadStatButton_pressed"]

@@ -11,7 +11,7 @@ const Dialog8 = preload("res://assets/scripts/dialogs/dialog8.gd")
 const Dialog9 = preload("res://assets/scripts/dialogs/dialog9.gd")
 const _DEBUG_MODE:bool = false
 
-var unlocked_levels:Array = [1]
+var unlocked_levels = "[1]"
 var current_level:int = -1
 var levels_data:Array = [
 	Dialog1.new().data, Dialog2.new().data, Dialog3.new().data,
@@ -26,29 +26,44 @@ const text_answer = preload("res://scenes/uielements/controltext_rotated.tscn")
 const animation = preload("res://scenes/uielements/animation.tscn")
 
 func _ready():
-	YandexSDK.connect("data_loaded", self, "_on_data_load")
-	YandexSDK.load_data(["unlocked_levels"])
+	YandexSDK.connect("data_loaded", self, "_on_data_loaded")
+
 	YandexSDK.init_game()
 	YandexSDK.init_player()
 	
 
 func save_data():
+	print("WILL BE SAVED  ",unlocked_levels,"   ",typeof(unlocked_levels))
 	YandexSDK.save_data({
 		"unlocked_levels": unlocked_levels
 	})
 		
-func _on_data_load(data: Dictionary):
-	unlocked_levels = data["unlocked_levels"]
-	
+func _on_data_loaded(data: Dictionary):
+	if data.has("unlocked_levels"):
+		unlocked_levels = data.unlocked_levels
+
+func _on_unlocked_levels_loaded(data: Dictionary):
+	if data.has("test"):
+		unlocked_levels = data.unlocked_levels	
+
 func unlock_level(level_index: int):
+	unlocked_levels = str_to_list(unlocked_levels)
 	if unlocked_levels.has(level_index):
 		return
 	unlocked_levels.append(level_index)
+	unlocked_levels = str(unlocked_levels)
+	print(unlocked_levels)
 	save_data()
 
 	
 func is_debug_enabled()->bool:
 	return _DEBUG_MODE
 
+func str_to_list(str_l) -> Array:
+	var list_ = []
+	for i in str_l:
+		if i in "1234567890":
+			list_.append(i)
+	return list_
 
 	
