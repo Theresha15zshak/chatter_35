@@ -60,15 +60,17 @@ func init_leaderboard():
 
 
 func init_game():
-	if not game_initialized:
-		var options = JavaScript.create_object("Object")
-		window.InitGame(options, callback_game_initialized)
+	if OS.has_feature("yandex"):
+		if not game_initialized:
+			var options = JavaScript.create_object("Object")
+			window.InitGame(options, callback_game_initialized)
 
 
 func show_ad():
-	if not game_initialized :
-		yield(self, "game_initialized")
-	window.ShowAd(callback_ad)
+	if OS.has_feature("yandex"):
+		if not game_initialized :
+			yield(self, "game_initialized")
+		window.ShowAd(callback_ad)
 
 
 func show_rewarded_ad():
@@ -79,18 +81,20 @@ func show_rewarded_ad():
 
 
 func init_player():
-	if not game_initialized:
-		yield(self, "game_initialized")
-	window.InitPlayer(false, callback_player_initialized)
+	if OS.has_feature("yandex"):
+		if not game_initialized:
+			yield(self, "game_initialized")
+		window.InitPlayer(false, callback_player_initialized)
 
 
 func save_data(data: Dictionary, flush: bool = false):
-	if not player_initialized:
-		yield(self, "player_initialized")
-	var saves = JavaScript.create_object("Object")
-	for i in data.keys():
-		saves[i] = data[i]
-	window.SaveData(saves, flush)
+	if OS.has_feature("yandex"):
+		if not player_initialized:
+			yield(self, "player_initialized")
+		var saves = JavaScript.create_object("Object")
+		for i in data.keys():
+			saves[i] = data[i]
+		window.SaveData(saves, flush)
 
 
 func save_stats(stats: Dictionary):
@@ -110,12 +114,13 @@ func save_leaderboard_score(leaderboard_name, score, extra_data=""):
 
 
 func load_data(keys: Array):
-	if not player_initialized:
-		yield(self, "player_initialized")
-	var saves = JavaScript.create_object("Array", keys.size())
-	for i in range(keys.size()):
-		saves[i] = keys[i]
-	window.LoadData(saves, callback_data_loaded)
+	if OS.has_feature("yandex"):
+		if not player_initialized:
+			yield(self, "player_initialized")
+		var saves = JavaScript.create_object("Array", keys.size())
+		for i in range(keys.size()):
+			saves[i] = keys[i]
+		window.LoadData(saves, callback_data_loaded)
 
 
 func load_stats(keys: Array):
