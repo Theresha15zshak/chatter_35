@@ -1,4 +1,5 @@
 extends Node
+
 const DialogData = preload("res://assets/scripts/dialog_data.gd")
 const Dialog1 = preload("res://assets/scripts/dialogs/dialog1.gd")
 const Dialog2 = preload("res://assets/scripts/dialogs/dialog2.gd")
@@ -9,9 +10,9 @@ const Dialog6 = preload("res://assets/scripts/dialogs/dialog6.gd")
 const Dialog7 = preload("res://assets/scripts/dialogs/dialog7.gd")
 const Dialog8 = preload("res://assets/scripts/dialogs/dialog8.gd")
 const Dialog9 = preload("res://assets/scripts/dialogs/dialog9.gd")
-const _DEBUG_MODE:bool = true
+const _DEBUG_MODE:bool = false
 
-var unlocked_levels = [1]
+var unlocked_levels:Array = []
 var current_level:int = -1
 var levels_data:Array = [
 	Dialog1.new().data, Dialog2.new().data, Dialog3.new().data,
@@ -25,12 +26,46 @@ const text = preload("res://scenes/uielements/controltext.tscn")
 const text_answer = preload("res://scenes/uielements/controltext_rotated.tscn")
 const animation = preload("res://scenes/uielements/animation.tscn")
 
+func _enter_tree():
+	
+#		yield(get_tree().create_timer(5), "timeout")
+#		for i in unlocked_levels:
+#			var rect_node_path = "TextureButton" + str(i) + "/TextureRect"
+#			if !has_node(rect_node_path):
+#				continue
+#			get_node(rect_node_path).hide()
+#			get_node("TextureButton" + str(i)).disabled = false
+	
+#	yield(get_tree().create_timer(8), "timeout")
+	print("enter_tree")
+
+	
 func _ready():
 	YandexSDK.connect("data_loaded", self, "_on_data_loaded")
 
 	YandexSDK.init_game()
 	YandexSDK.init_player()
+#	for a in range(2):
+#		yield(get_tree().create_timer(5), "timeout")
+#		YandexSDK.load_data(["unlocked_levels"])
+#		yield(get_tree().create_timer(0.003), "timeout")
+#		YandexSDK.load_data(["unlocked_levels"])
+#		yield(get_tree().create_timer(0.003), "timeout")
+#		YandexSDK.load_data(["unlocked_levels"])
+#		yield(get_tree().create_timer(0.003), "timeout")
+#		YandexSDK.load_data(["unlocked_levels"])
+#		yield(get_tree().create_timer(0.003), "timeout")
+#		YandexSDK.load_data(["unlocked_levels"])
+#		yield(get_tree().create_timer(0.02), "timeout")
+##		var unlocked_levels = Global.unlocked_levels
+#		print("WILL BE LOADED  ",unlocked_levels,"   ",a )
+#		yield(get_tree().create_timer(2.3), "timeout")
+#
+#
+#	print("UNLOCKED_LEVELS!  ", unlocked_levels)
+#	print("ready")
 	
+
 
 func save_data():
 	print("WILL BE SAVED  ",unlocked_levels,"   ",typeof(unlocked_levels))
@@ -40,22 +75,27 @@ func save_data():
 		
 func _on_data_loaded(data: Dictionary):
 	if data.has("unlocked_levels"):
-		unlocked_levels = data.unlocked_levels
+		unlocked_levels = str_to_list(data.unlocked_levels)
+		
 
-func _on_unlocked_levels_loaded(data: Dictionary):
-	if data.has("test"):
-		unlocked_levels = data.unlocked_levels	
+#func _on_unlocked_levels_loaded(data: Dictionary):
+#	if data.has("test"):
+#		unlocked_levels = str_to_list(data.unlocked_levels)
 
 func unlock_level(level_index: int):
-	unlocked_levels = unlocked_levels
 	unlocked_levels.append(level_index)
-	unlocked_levels = str(unlocked_levels)
-	print(unlocked_levels)
 	save_data()
 
 	
 func is_debug_enabled()->bool:
 	return _DEBUG_MODE
 
+func str_to_list(string_):
+	var answer = []
+	for i in string_:
+		if i in "123456789":
+			answer.append(i)
+	return answer
 
-	
+func _exit_tree():
+	print("exit_tree")
