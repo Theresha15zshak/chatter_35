@@ -3,6 +3,7 @@ extends Control
 var is_button_pressed:bool = false # Переменная нажат ли кнопка меню, если да то скрываем
 const TEST_LEVELS = true
 func _ready():
+	print("1.READY")
 #	Global.connect("Data_loaded",self, "")
 #	yield(self, "Data_loaded")
 	print("ready_menu")
@@ -40,19 +41,20 @@ func _on_Button_pressed():
 
 
 
-
-
+func load_dummy_levels():
+	yield(get_tree().create_timer(2.0), "timeout")
+	return [1,2]
 
 func _on_Button_start_pressed():
 	var unlocked_levels
 	if (not OS.has_feature("yandex")) and TEST_LEVELS:
-		unlocked_levels = [1,2]
+		unlocked_levels = yield (load_dummy_levels(), "completed")
 	elif (not OS.has_feature("yandex")) and not TEST_LEVELS:
 		unlocked_levels = [1]
 	else:
-		for sus in range(2):
-			YandexSDK.load_data(["unlocked_levels"])
-			yield(get_tree().create_timer(0.06), "timeout")
+		for sus in range(1):
+#			yield(YandexSDK.load_data(["unlocked_levels"]), "completed")
+#			yield(yield(get_tree().create_timer(0.06), "timeout"), "completed")
 			YandexSDK.load_data(["unlocked_levels"])
 		unlocked_levels = Global.unlocked_levels
 	print("WILL BE LOADED", unlocked_levels)
@@ -64,4 +66,4 @@ func _on_Button_start_pressed():
 		get_node("TextureButton" + str(i)).disabled = false
 	
 	$Panel.hide()
-	$Button.hide()
+#	$Button.hide()

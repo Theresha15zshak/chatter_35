@@ -41,6 +41,7 @@ func _enter_tree():
 
 	
 func _ready():
+	print("1.GLOBAL")
 	YandexSDK.connect("data_loaded", self, "_on_data_loaded")
 
 	YandexSDK.init_game()
@@ -76,6 +77,7 @@ func save_data():
 func _on_data_loaded(data: Dictionary):
 	if data.has("unlocked_levels"):
 		unlocked_levels = str_to_list(data.unlocked_levels)
+		print("ON_DATA_LOADED")
 		
 
 #func _on_unlocked_levels_loaded(data: Dictionary):
