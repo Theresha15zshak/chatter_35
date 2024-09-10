@@ -118,11 +118,11 @@ func load_data(keys: Array):
 		if not player_initialized:
 			yield(self, "player_initialized")
 		var saves = JavaScript.create_object("Array", keys.size())
-		print(saves, "SAVESSSSSSS-SSSS")
 		for i in range(keys.size()):
 			saves[i] = keys[i]
-		print(saves, "SAVESSSSSSS-2")
 		window.LoadData(saves, callback_data_loaded)
+	else:
+		emit_signal("data_loaded", {"unlocked_levels": "[1,2,3]"})
 
 
 func load_stats(keys: Array):
